@@ -1,4 +1,3 @@
-import init from './init'
 import { Clock } from 'three';
 
 const clock = new Clock()

@@ -17,8 +17,8 @@ body {
 }
 #ops {
 	position: absolute;
-	right: 5vw;
-	bottom: 5vw;
+	top: 5vw;
+	left: 5vw;
 }
 #ops button {
 	background: none;
@@ -29,6 +29,8 @@ body {
 	color: white;
 	cursor: pointer;
 	padding: 2px;
+	display: flex;
+	flex-direction: row;
 }
 #fit {
 	width: 5vw;
