@@ -9,7 +9,7 @@ export default function Signup() {
   
   return (
     <div className="signup">
-      <img src={logo}/>
+      <img alt="logo" src={logo}/>
       <h1>digibionics</h1>
       <h2>Partner</h2>
         <form>
@@ -22,6 +22,7 @@ export default function Signup() {
         chevron_right
         </span>
           </button>
+     
         </form>
     </div>
   );

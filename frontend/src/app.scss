@@ -1,11 +1,7 @@
 .app {
 	background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
-		url(./bgimg.jpg);
-
+		url("./bgimg.jpg");
 	height: 100vh;
-
-	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
-	background-color: black;
 }
