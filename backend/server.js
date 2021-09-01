@@ -1,25 +1,18 @@
-const express = require('express')
-const app = express()
-const env = require('dotenv')
+const express = require("express");
+const app = express();
 
-const port = 3000
-
-
+//ENVIRONNMENT CNFIG
+require("dotenv").config();
 
 //Body access
-app.use (express.urlencoded({extended: false}))
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+app.use("/patient", require("./routes/patient"));
+app.use("/partner", require("./routes/partner"));
 
-app.use('/patient', require('./routes/patient'))
-app.use('/partner', require('./routes/partner'))
+app.get("/", (req, res) => {
+	res.send("Hello World!");
+});
 
-
-
-
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.listen(port)
+app.listen(process.env.PORT);
