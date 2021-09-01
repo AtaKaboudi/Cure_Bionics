@@ -1,0 +1,156 @@
+.partner {
+    flex: 4;
+    padding: 20px;
+}
+
+.partnerTitleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.partnerAddButton {
+    width: 80px;
+    border: none;
+    padding: 5px;
+    background-color: rgba(155, 155, 255, 0.733);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.partnerContainer {
+    display: flex;
+    margin-top: 20px;
+}
+
+.partnerShow {
+    flex: 1;
+    padding: 20px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 15px -10px rgba($color: #000000, $alpha: 1.0);
+    padding: 20px;
+    margin-right: 20px;
+}
+
+.partnerUpdate {
+    flex: 2;
+    padding: 20px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0);
+    box-shadow: 0px 0px 15px -10px rgba($color: #000000, $alpha: 1.0);
+    padding: 20px;
+    margin-left: 20px;
+}
+
+.partnerShowTop {
+    display: flex;
+    align-items: center;
+}
+
+.partnerShowImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.partnerShowTopTitle {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.partnerShowPartnername {
+    font-weight: 600;
+}
+
+.partnerShowPartnerTitle {
+    font-weight: 300;
+}
+
+.partnerShowTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgb(173, 170, 170);
+}
+
+.partnerShowBottom {
+    margin-top: 20px;
+}
+
+.partnerShowInfo {
+    display: flex;
+    align-items: center;
+    margin: 20px 0px;
+    color: #444;
+}
+
+.partnerShowIcon {
+    font-size: 10 !important;
+}
+
+.partnerShowInfoTitle {
+    margin-left: 10px;
+}
+
+.partnerUpdateImg {
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.partnerUpdateForm {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.partnerUpdateItem {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.partnerUpdateItem>label {
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.partnerUpdateInput {
+    border: none;
+    width: 250px;
+    height: 30px;
+    border-bottom: 1px solid gray;
+}
+
+.partnerUpdateRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.partnerUpdateUpload {
+    display: flex;
+    align-items: center;
+}
+
+.partnerUpdateTitle {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.partnerUpdateIcon {
+    cursor: pointer;
+}
+
+.partnerUpdateButton {
+    border-radius: 5px;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    background-color: rgb(57, 57, 211);
+    color: white;
+    font-weight: 600;
+}
