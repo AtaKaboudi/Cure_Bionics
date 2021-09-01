@@ -1,110 +1,109 @@
 .adminHome {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    height: calc(100vh - 50px);
-    position: relative;
-    flex: 4;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	flex: 4;
 }
-
+.mainSection {
+	display: flex;
+	flex-direction: row;
+}
+.mainPannelContainer {
+	margin-top: 2vh;
+}
 .partnerOverview {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
 }
 
 .featuredItem {
-    flex: 1;
-    margin: 0px 20px;
-    padding: 30px;
-    border-radius: 10px;
-    cursor: pointer;
+	flex: 1;
+	margin: 0px 20px;
+	padding: 30px;
+	border-radius: 10px;
+	cursor: pointer;
 
-    -webkit-box-shadow: -1px 0px 17px -3px #C0BDBF;
-    box-shadow: -1px 0px 17px -3px #94b7ec;
+	-webkit-box-shadow: -1px 0px 17px -3px #c0bdbf;
+	box-shadow: -1px 0px 17px -3px #94b7ec;
 }
 
 .featuredTitle {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 15px;
+	font-family: "Source Sans Pro", sans-serif;
+	font-size: 15px;
 }
 
 .featuredPartnerContainer {
-    margin: 10px 0px;
-    display: flex;
-    align-items: center;
+	margin: 10px 0px;
+	display: flex;
+	align-items: center;
 }
 
 .featuredPartner {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 20px;
-    font-weight: 600;
+	font-family: "Source Sans Pro", sans-serif;
+	font-size: 20px;
+	font-weight: 600;
 }
 
-
 h1 {
-    margin-top: 20px;
-    font-family: 'Source Sans Pro', sans-serif;
-    margin-left: 10px;
+	margin-top: 20px;
+	font-family: "Source Sans Pro", sans-serif;
+	margin-left: 10px;
 }
 
 .partnerList {
+	margin-top: 20px;
+	display: flex;
+	flex-direction: row;
 
-    margin-top: 20px;
-    display: flex;
-    flex-direction: row;
+	.featuredPartnerCard {
+		flex: 1;
+		margin: 0px 20px;
+		padding: 30px;
+		border-radius: 10px;
+		cursor: pointer;
+		margin-top: 10px;
+		height: 50vh;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
 
-    .featuredPartnerCard {
-        flex: 1;
-        margin: 0px 20px;
-        padding: 30px;
-        border-radius: 10px;
-        cursor: pointer;
-        margin-top: 10px;
-        height: 50vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
+		-webkit-box-shadow: -1px 0px 17px -3px #c0bdbf;
+		box-shadow: -1px 0px 17px -3px #94b7ec;
 
-        -webkit-box-shadow: -1px 0px 17px -3px #C0BDBF;
-        box-shadow: -1px 0px 17px -3px #94b7ec;
+		.partnerShowImg {
+			width: 50%;
+			height: 50%;
+			border-radius: 100px;
+			object-fit: cover;
+		}
 
-        .partnerShowImg {
-            width: 50%;
-            height: 50%;
-            border-radius: 100px;
-            object-fit: cover;
-        }
+		.featuredName {
+			font-family: "Source Sans Pro", sans-serif;
+			font-weight: 500;
+		}
 
-        .featuredName {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-weight: 500;
-        }
+		.featuredAppointment {
+			font-family: "Source Sans Pro", sans-serif;
+			font-weight: 300;
+		}
 
-        .featuredAppointment {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-weight: 300;
-        }
+		.updateButton {
+			.partnerUpdateButton {
+				border-radius: 5px;
+				border: none;
+				padding: 5px;
+				cursor: pointer;
+				background-color: rgb(57, 57, 211);
+				color: white;
+				font-weight: 600;
 
-        .updateButton {
-
-
-            .partnerUpdateButton {
-                border-radius: 5px;
-                border: none;
-                padding: 5px;
-                cursor: pointer;
-                background-color: rgb(57, 57, 211);
-                color: white;
-                font-weight: 600;
-
-                .partnerUpdateIcon {
-                    font-size: 15px;
-                    cursor: pointer;
-                }
-            }
-        }
-    }
+				.partnerUpdateIcon {
+					font-size: 15px;
+					cursor: pointer;
+				}
+			}
+		}
+	}
 }
