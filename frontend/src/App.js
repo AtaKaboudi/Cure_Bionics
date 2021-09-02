@@ -4,6 +4,7 @@ import Home from "./components/pages/client/home/Home";
 import NewPartner from "./components/pages/admin/newPartner/NewPartner";
 import AdminHome from "./components/pages/admin/adminHome/AdminHome";
 import Signup from "./components/pages/client/signup/Signup";
+import NewPatient from "./components/pages/client/newPatient/newPatient";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import "./app.scss";
 
@@ -16,6 +17,8 @@ function App() {
 					<Route component={Company} path="/partner/company" />
 					<Route component={UpdatePatient} path="/partner/updatePatient" />
 					<Route component={Signup} path="/partner/signUp"></Route>
+					<Route component={NewPatient} path="/partner/newPatient"></Route>
+
 					<Route component={NewPartner} path="/admin/newpartner"></Route>
 					<Route component={AdminHome} path="/admin"></Route>
 				</Switch>

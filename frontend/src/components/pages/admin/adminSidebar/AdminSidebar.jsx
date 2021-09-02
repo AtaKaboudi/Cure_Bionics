@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 export default function AdminSidebar() {
 	return (
-		<div className="sidebar">
+		<div className="adminSidebar">
 			<div className="sidebarWrapper">
 				<div className="sidebarMenu">
 					<h3 className="sidebarTitle">Dashboard</h3>

@@ -1,46 +1,46 @@
-.sidebar {
-    flex: 1;
-    height: 120vh;
-    background-color: rgb(52, 82, 252);
-    position: sticky;
-    z-index: 2;
-}
+.adminSidebar {
+	flex: 1;
+	height: 120vh;
+	background-color: rgb(52, 82, 252);
+	position: sticky;
+	z-index: 2;
 
-.sidebarWrapper {
-    padding: 20px;
-    color: rgb(32, 32, 32);
-}
+	.sidebarWrapper {
+		padding: 20px;
+		color: rgb(32, 32, 32);
+	}
 
-.sidebarMenu {
-    margin-bottom: 10px;
-}
+	.sidebarMenu {
+		margin-bottom: 10px;
+	}
 
-.sidebarTitle {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 13px;
-    color: rgb(63, 63, 63);
-}
+	.sidebarTitle {
+		font-family: "Source Sans Pro", sans-serif;
+		font-size: 13px;
+		color: rgb(63, 63, 63);
+	}
 
-.sidebarList {
-    list-style: none;
-    padding: 5px;
-}
+	.sidebarList {
+		list-style: none;
+		padding: 5px;
+	}
 
-.sidebarListItem {
-    padding: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    border-radius: 10px;
-}
+	.sidebarListItem {
+		padding: 5px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		border-radius: 10px;
+	}
 
-.sidebarListItem.active,
-.sidebarListItem:hover {
-    background-color: rgb(49, 70, 192);
-}
+	.sidebarListItem.active,
+	.sidebarListItem:hover {
+		background-color: rgb(49, 70, 192);
+	}
 
-.sidebarIcon {
-    font-family: 'Source Sans Pro', sans-serif;
-    margin-right: 5px;
-    font-size: 20px !important;
+	.sidebarIcon {
+		font-family: "Source Sans Pro", sans-serif;
+		margin-right: 5px;
+		font-size: 20px !important;
+	}
 }

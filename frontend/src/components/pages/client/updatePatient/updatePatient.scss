@@ -8,7 +8,7 @@
 	flex-direction: row;
 }
 
-.patientAddButton {
+.patientEditButton {
 	width: 80px;
 	border: none;
 	padding: 5px;
@@ -16,11 +16,13 @@
 	border-radius: 5px;
 	cursor: pointer;
 	font-size: 15px;
+	margin-left: 90%;
 }
 
 .patientContainer {
 	display: flex;
 	margin-top: 20px;
+	margin-left: 5vw;
 }
 
 .patientShow {
@@ -30,6 +32,7 @@
 	box-shadow: 0px 0px 15px -10px rgba($color: #000000, $alpha: 1);
 	padding: 20px;
 	margin-right: 20px;
+	width: 60vw;
 }
 
 .patientUpdate {
@@ -67,21 +70,28 @@
 	font-weight: 300;
 }
 
+.patientShowBottom {
+	margin-top: 7vh;
+	display: flex;
+	flex-wrap: wrap;
+}
+
 .patientShowTitle {
 	font-size: 14px;
 	font-weight: 600;
 	color: rgb(173, 170, 170);
-}
-
-.patientShowBottom {
-	margin-top: 20px;
+	margin: 0px 3vw 3vh 0px;
+	width: 100%;
 }
 
 .patientShowInfo {
 	display: flex;
 	align-items: center;
-	margin: 20px 0px;
+	margin: 2vh 1vw;
 	color: #444;
+	min-width: 10vw;
+	width: fit-content;
+	height: fit-content;
 }
 
 .patientShowIcon {
@@ -90,6 +100,11 @@
 
 .patientShowInfoTitle {
 	margin-left: 10px;
+}
+.patientUpdateLeft {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
 }
 
 .patientUpdateImg {
@@ -109,7 +124,13 @@
 .patientUpdateItem {
 	display: flex;
 	flex-direction: column;
-	margin-top: 10px;
+	margin: 1vh 2vw;
+	label {
+		font-size: 22px;
+	}
+	input {
+		color: #8b8b8b;
+	}
 }
 
 .patientUpdateItem > label {
