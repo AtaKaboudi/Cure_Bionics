@@ -34,6 +34,17 @@ function queryPatient_id(id, callback) {
 		}
 	);
 }
+function queryPatient_partner_id(partner_id, callback) {
+	db.query(
+		"SELECT * FROM " +
+			process.env.DATABASE_PATIENT_TABLE +
+			" WHERE partner_id =  ?",
+		[partner_id],
+		async (err, resu) => {
+			callback(err, resu);
+		}
+	);
+}
 
 function insertPatient(req, callback) {
 	db.query(
@@ -67,6 +78,18 @@ function deletePatient(patient_id, callback) {
 	);
 }
 
+function queryPatient_status(status, partner_id, callback) {
+	db.query(
+		"  SELECT  COUNT(*) AS count FROM " +
+			process.env.DATABASE_PATIENT_TABLE +
+			" WHERE status = ? AND partner_id = ? ",
+		[status, partner_id],
+		(err, resu) => {
+			callback(err, resu);
+		}
+	);
+}
+
 function getCurrentDate() {
 	var today = new Date();
 	var dd = String(today.getDate()).padStart(2, "0");
@@ -89,6 +112,17 @@ function queryPartner_id(id, callback) {
 	);
 }
 
+function queryPartnerRepresentative(partner_id, callback) {
+	db.query(
+		"SELECT company_name,representative,email,phone_number,country,rep_image_url FROM " +
+			process.env.DATABASE_PARTNER_TABLE +
+			" WHERE partner_id = ? ",
+		[partner_id],
+		(err, resu) => {
+			callback(err, resu);
+		}
+	);
+}
 function insertPartner(req, callback) {
 	db.query(
 		"INSERT INTO " + process.env.DATABASE_PARTNER_TABLE + " SET ?",
@@ -124,6 +158,9 @@ function deletePartner(partner_id, callback) {
 }
 
 module.exports = {
+	queryPatient_partner_id,
+	queryPartnerRepresentative,
+	queryPatient_status,
 	queryPartner_id,
 	queryPatient_email,
 	queryPatient_id,
