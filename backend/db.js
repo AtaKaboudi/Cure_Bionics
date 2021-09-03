@@ -90,6 +90,18 @@ function queryPatient_status(status, partner_id, callback) {
 	);
 }
 
+function queryAllPatient_status(status, callback) {
+	db.query(
+		"  SELECT  COUNT(*) AS count FROM " +
+			process.env.DATABASE_PATIENT_TABLE +
+			" WHERE status = ? ",
+		[status],
+		(err, resu) => {
+			callback(err, resu);
+		}
+	);
+}
+
 function getCurrentDate() {
 	var today = new Date();
 	var dd = String(today.getDate()).padStart(2, "0");
@@ -158,6 +170,7 @@ function deletePartner(partner_id, callback) {
 }
 
 module.exports = {
+	queryAllPatient_status,
 	queryPatient_partner_id,
 	queryPartnerRepresentative,
 	queryPatient_status,

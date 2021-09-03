@@ -58,6 +58,20 @@ router.get("/status", (req, res) => {
 		});
 	});
 });
+router.get("/status/all", (req, res) => {
+	let response = {};
+	db.queryAllPatient_status(0, (err, resu) => {
+		if (err) res.send("error");
+		response.waiting = resu[0].count;
+
+		db.queryAllPatient_status(1, (err, resu) => {
+			if (err) res.send("error");
+			response.fitted = resu[0].count;
+
+			res.send(response);
+		});
+	});
+});
 
 router.get("/representative", (req, res) => {
 	let partner_id = req.body.partner_id;
