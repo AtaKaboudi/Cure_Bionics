@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./newPatient.scss";
 import Topbar from "../../admin/topbar/Topbar";
 import Sidebar from "../sidebar/Sidebar";
-
+import Cad from "../cad/cad";
 export default function NewPatient() {
 	let [input, setInput] = useState({
 		first_name: "firstName",
@@ -149,6 +149,10 @@ export default function NewPatient() {
 					</form>
 				</div>
 			</div>
+			<div className="cadContainer">
+				<canvas id="canvas"></canvas>
+			</div>{" "}
+			<Cad />
 		</div>
 	);
 }
