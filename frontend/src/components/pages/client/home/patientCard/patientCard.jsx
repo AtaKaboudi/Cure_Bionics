@@ -13,7 +13,7 @@ export default function PatientCard(props) {
 				<span className="featuredAppointment">9.30 AM</span>
 			</div>
 			<Link to="/partner/updatePatient" className="updateButton">
-				<button className="patientUpdateButton">Update</button>
+				<button className="patientUpdateButton">Details</button>
 			</Link>
 		</div>
 	);

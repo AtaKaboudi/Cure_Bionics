@@ -18,6 +18,7 @@ export default function FeaturedInfo() {
 			<div className="featured">
 				<SideBar />
 				<div className="dashboardContainer">
+					<h2>Overview</h2>
 					<div className="patientOverview">
 						<div className="featuredItem">
 							<span className="featuredTitle">Total patients</span>
@@ -41,7 +42,7 @@ export default function FeaturedInfo() {
 						</div>
 					</div>
 
-					<h1>Patients</h1>
+					<h2>Patients</h2>
 					<div className="patientList">
 						<PatientCard params={params} />
 						<PatientCard params={params} />

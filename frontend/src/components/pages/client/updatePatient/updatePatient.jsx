@@ -31,7 +31,7 @@ export default function UpdatePatient() {
 		limb_photo_url: "a",
 		partner_id: "1",
 		comment_: null,
-		status: null,
+		status: 1,
 	});
 
 	function changeParams(attribute) {
@@ -180,7 +180,7 @@ export default function UpdatePatient() {
 											<input
 												type="text"
 												value={params.email}
-												onClick={() => changeParams({ EmailIcon: "" })}
+												onClick={() => changeParams({ email: "" })}
 												onChange={(e) =>
 													changeParams({ email: e.target.value })
 												}
@@ -267,19 +267,21 @@ export default function UpdatePatient() {
 												className="patientUpdateInput"
 											/>
 										</div>
-									</div>
-									<div className="patientUpdateRight">
-										<div className="patientUpdateUpload">
-											<label htmlFor="file"></label>
+										<div className="patientUpdateItem">
+											<label>Status</label>
 											<input
-												type="file"
-												id="file"
-												style={{ display: "none" }}
+												type="text"
+												value={params.status}
+												onClick={() => changeParams({ status: "" })}
+												onChange={(e) =>
+													changeParams({ status: e.target.value })
+												}
+												className="patientUpdateInput"
 											/>
 										</div>
-										<button className="patientUpdateButton">Update</button>
 									</div>
 								</form>
+								<button className="patientUpdateButton">Update</button>
 							</div>
 						)}
 					</div>

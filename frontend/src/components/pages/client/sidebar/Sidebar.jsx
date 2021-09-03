@@ -15,31 +15,31 @@ export default function Sidebar() {
 				<ul className="sidebarList">
 					<Link to="/partner" style={{ textDecoration: "none" }}>
 						<li>
-							<span class="material-icons">home</span>
+							<span className="material-icons">home</span>
 							<h2>Home</h2>
-							<span class="material-icons">chevron_right</span>
+							<span className="material-icons">chevron_right</span>
 						</li>
 					</Link>
 
 					<Link to="/partner/company" style={{ textDecoration: "none" }}>
 						<li>
-							<span class="material-icons">tune</span>
+							<span className="material-icons">tune</span>
 							<h2>Settings</h2>
-							<span class="material-icons">chevron_right</span>
+							<span className="material-icons">chevron_right</span>
 						</li>
 					</Link>
 					<Link to="/partner/newPatient" style={{ textDecoration: "none" }}>
 						<li>
-							<span class="material-icons">add</span>
+							<span className="material-icons">add</span>
 							<h2>New</h2>
-							<span class="material-icons">chevron_right</span>
+							<span className="material-icons">chevron_right</span>
 						</li>
 					</Link>
 
 					<li>
-						<span class="material-icons">leaderboard</span>
+						<span className="material-icons">leaderboard</span>
 						<h2>Stats</h2>
-						<span class="material-icons">chevron_right</span>
+						<span className="material-icons">chevron_right</span>
 					</li>
 				</ul>
 			</div>

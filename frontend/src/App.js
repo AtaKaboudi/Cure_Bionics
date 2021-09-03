@@ -16,11 +16,11 @@ function App() {
 					<Route component={Home} path="/partner" exact />
 					<Route component={Company} path="/partner/company" />
 					<Route component={UpdatePatient} path="/partner/updatePatient" />
-					<Route component={Signup} path="/partner/signUp"></Route>
 					<Route component={NewPatient} path="/partner/newPatient"></Route>
 
 					<Route component={NewPartner} path="/admin/newpartner"></Route>
 					<Route component={AdminHome} path="/admin"></Route>
+					<Route component={Signup} path="/"></Route>
 				</Switch>
 			</BrowserRouter>
 		</div>

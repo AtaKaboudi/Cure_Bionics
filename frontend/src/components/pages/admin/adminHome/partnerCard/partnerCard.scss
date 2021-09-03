@@ -1,4 +1,4 @@
-.featuredPatientCard {
+.featuredPartnerCard {
 	flex: 1;
 	margin: 0px 20px;
 	padding: 30px;
@@ -10,37 +10,41 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
+	max-width: 15vw;
 
+	-webkit-box-shadow: -1px 0px 17px -3px #c0bdbf;
 	box-shadow: -1px 0px 17px -3px #94b7ec;
 
-	.patientShowImg {
+	.partnerShowImg {
 		width: 50%;
 		height: 50%;
 		border-radius: 100px;
 		object-fit: cover;
 	}
-
-	.featuredName {
-		font-family: "Source Sans Pro", sans-serif;
-		font-weight: 500;
+	h2 {
+		font-weight: 200;
+		font-size: 22px;
+		margin: 0px;
 	}
-
+	label {
+		margin-top: 0px;
+		font-size: 16px;
+	}
 	.featuredAppointment {
-		font-family: "Source Sans Pro", sans-serif;
 		font-weight: 300;
 	}
 
 	.updateButton {
-		.patientUpdateButton {
+		.partnerUpdateButton {
 			border-radius: 5px;
 			border: none;
 			padding: 5px;
 			cursor: pointer;
 			background-color: rgb(57, 57, 211);
 			color: white;
-			font-weight: 100;
+			font-weight: 600;
 
-			.patientUpdateIcon {
+			.partnerUpdateIcon {
 				font-size: 15px;
 				cursor: pointer;
 			}

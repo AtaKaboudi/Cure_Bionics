@@ -2,14 +2,14 @@
 	display: flex;
 	justify-content: space-between;
 	flex-direction: column;
-	flex: 4;
 }
 .mainSection {
 	display: flex;
 	flex-direction: row;
 }
-.mainPannelContainer {
+.adminMainPannelContainer {
 	margin-top: 2vh;
+	margin-left: 1vw;
 }
 .partnerOverview {
 	width: 100%;
@@ -55,55 +55,5 @@ h1 {
 	margin-top: 20px;
 	display: flex;
 	flex-direction: row;
-
-	.featuredPartnerCard {
-		flex: 1;
-		margin: 0px 20px;
-		padding: 30px;
-		border-radius: 10px;
-		cursor: pointer;
-		margin-top: 10px;
-		height: 50vh;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: space-between;
-
-		-webkit-box-shadow: -1px 0px 17px -3px #c0bdbf;
-		box-shadow: -1px 0px 17px -3px #94b7ec;
-
-		.partnerShowImg {
-			width: 50%;
-			height: 50%;
-			border-radius: 100px;
-			object-fit: cover;
-		}
-
-		.featuredName {
-			font-family: "Source Sans Pro", sans-serif;
-			font-weight: 500;
-		}
-
-		.featuredAppointment {
-			font-family: "Source Sans Pro", sans-serif;
-			font-weight: 300;
-		}
-
-		.updateButton {
-			.partnerUpdateButton {
-				border-radius: 5px;
-				border: none;
-				padding: 5px;
-				cursor: pointer;
-				background-color: rgb(57, 57, 211);
-				color: white;
-				font-weight: 600;
-
-				.partnerUpdateIcon {
-					font-size: 15px;
-					cursor: pointer;
-				}
-			}
-		}
-	}
+	flex-wrap: wrap;
 }
