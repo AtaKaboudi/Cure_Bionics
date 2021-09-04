@@ -1,0 +1,71 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	height: 100vh;
+	font-family: "Poppins";
+}
+
+.webgl {
+	position: fixed;
+	top: 0;
+	left: 0;
+	outline: none;
+}
+#ops {
+	position: absolute;
+	top: 5vw;
+	left: 5vw;
+}
+#ops button {
+	background: none;
+	border: none;
+	border-bottom: 1px solid #bdbdbd;
+	font-size: 14px;
+	font-family: "Quicksand";
+	color: white;
+	cursor: pointer;
+	padding: 2px;
+	display: flex;
+	flex-direction: row;
+}
+#fit {
+	width: 5vw;
+}
+#prompt {
+	position: absolute;
+	bottom: 40px;
+	left: 8vw;
+}
+#status {
+	color: white;
+	font-size: 20px;
+	font-family: "Quicksand";
+}
+
+#axisGuide {
+	position: absolute;
+	bottom: 5px;
+	left: 5vw;
+	display: inline-flex;
+	flex-direction: row;
+	color: white;
+}
+#axisGuide h1 {
+	font-size: 12px;
+	font-family: "Quicksand";
+	padding: 2px;
+	margin: 1vw;
+}
+#z {
+	color: #c0392b;
+}
+#x {
+	color: #3498db;
+}
+#y {
+	color: #27ae60;
+}
