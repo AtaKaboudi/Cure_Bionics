@@ -149,9 +149,7 @@ export default function NewPatient() {
 					</form>
 				</div>
 			</div>
-			<div className="cadContainer">
-				<canvas id="canvas"></canvas>
-			</div>{" "}
+
 			<Cad />
 		</div>
 	);

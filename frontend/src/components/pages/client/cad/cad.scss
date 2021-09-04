@@ -1,4 +1,54 @@
-.cadContainer {
-	width: 100vw;
-	height: 100vh;
+#ops {
+	position: absolute;
+	top: 130vh;
+	left: 5vw;
+}
+#ops button {
+	background: none;
+	border: none;
+	border-bottom: 1px solid #bdbdbd;
+	font-size: 14px;
+	font-family: "Quicksand";
+	color: white;
+	cursor: pointer;
+	padding: 2px;
+	display: flex;
+	flex-direction: row;
+}
+#fit {
+	width: 5vw;
+}
+#prompt {
+	position: absolute;
+	top: 190vh;
+	left: 8vw;
+}
+#status {
+	color: white;
+	font-size: 20px;
+	font-family: "Quicksand";
+}
+
+#axisGuide {
+	position: absolute;
+	top: 195vh;
+	left: 5vw;
+	display: inline-flex;
+	flex-direction: row;
+	color: white;
+}
+#axisGuide h1 {
+	font-size: 12px;
+	font-family: "Quicksand";
+	padding: 2px;
+	margin: 1vw;
+}
+#z {
+	color: #c0392b;
+}
+#x {
+	color: #3498db;
+}
+#y {
+	color: #27ae60;
 }
