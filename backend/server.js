@@ -9,7 +9,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use("/patient", require("./routes/patient"));
-app.use("/partner", require("./routes/partner"));
+app.use("/auth", require("./routes/auth"));
 
 app.get("/", (req, res) => {
 	res.send("Hello World!");

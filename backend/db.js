@@ -169,7 +169,30 @@ function deletePartner(partner_id, callback) {
 	);
 }
 
+function login(params, callback) {
+	db.query(
+		"SELECT * FROM " + process.env.DATABASE_PARTNER_TABLE + " WHERE login = ? ",
+		[params.login],
+		(err, resu) => {
+			callback(err, resu);
+		}
+	);
+}
+function signUp(params, callback) {
+	console.log(params);
+
+	db.query(
+		"INSERT INTO " + process.env.DATABASE_PARTNER_TABLE + " SET ?",
+		[params],
+		(err, resu) => {
+			callback(err, resu);
+		}
+	);
+}
+
 module.exports = {
+	login,
+	signUp,
 	queryAllPatient_status,
 	queryPatient_partner_id,
 	queryPartnerRepresentative,
