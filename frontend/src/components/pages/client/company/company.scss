@@ -18,16 +18,15 @@
 
 	.companyContainer {
 		display: flex;
+		flex-direction: column;
 		margin-top: 20px;
-
 		.companyShow {
+			min-width: 30vw;
 			flex: 1;
-			padding: 20px;
 			-webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0);
 			box-shadow: 0px 0px 15px -10px rgba($color: #000000, $alpha: 1);
 			padding: 20px;
 			margin-right: 20px;
-			min-width: 18vw;
 
 			.companyShowTop {
 				display: flex;
@@ -58,19 +57,23 @@
 			}
 
 			.companyShowBottom {
+				display: flex;
+				flex-wrap: wrap;
+				flex-direction: row;
 				margin-top: 20px;
 
 				.companyShowTitle {
-					font-family: "Source Sans Pro", sans-serif;
 					font-size: 14px;
 					font-weight: 600;
 					color: rgb(173, 170, 170);
+					margin: 3vh 5vw 0px 0px;
+					width: 100%;
 				}
 
 				.companyShowInfo {
 					display: flex;
 					align-items: center;
-					margin: 20px 0px;
+					margin: 5vh 1vw;
 					color: #444;
 
 					.companyShowIcon {
@@ -79,7 +82,7 @@
 
 					.companyShowInfoTitle {
 						font-family: "Source Sans Pro", sans-serif;
-						margin-left: 10px;
+						margin: 10px;
 					}
 				}
 			}
@@ -165,5 +168,13 @@
 
 	.companyFormRight {
 		margin-left: 20px;
+	}
+	.editBtn {
+		border: none;
+		background: none;
+		text-align: end;
+		margin-bottom: 3vh;
+		width: 75vw;
+		cursor: pointer;
 	}
 }

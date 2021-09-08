@@ -12,7 +12,16 @@
 	align-items: center;
 	justify-content: space-between;
 }
-
+.topLeft {
+	margin-left: 2vw;
+}
+.centerText {
+	font-weight: 200;
+	font-size: 17px;
+	color: rgb(34, 32, 139);
+	text-transform: uppercase;
+	letter-spacing: 3px;
+}
 .logo {
 	font-weight: bold;
 	font-size: 25px;

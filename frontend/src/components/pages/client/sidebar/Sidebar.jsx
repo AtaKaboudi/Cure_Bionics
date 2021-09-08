@@ -1,10 +1,6 @@
 import React from "react";
 import "./sidebar.scss";
 import { Link } from "react-router-dom";
-import LineStyleIcon from "@material-ui/icons/LineStyle";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import AssessmentIcon from "@material-ui/icons/Assessment";
-import BusinessIcon from "@material-ui/icons/Business";
 
 export default function Sidebar() {
 	return (
