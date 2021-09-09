@@ -15,6 +15,21 @@ router.get("/email", (req, res) => {
 	});
 });
 
+router.get("/group", (req, res) => {
+	console.log(req.query);
+	if (!req.query.offset || !req.query.limit || !req.query.partner_id) {
+		res.send("INPUT ERROR");
+		return;
+	}
+	db.getPatientsGroup(req.query, (err, resu) => {
+		if (err) {
+			res.send("error");
+			return;
+		}
+		res.status(200).send(resu);
+	});
+});
+
 router.get("/id/:id", (req, res) => {
 	let id = req.params.id;
 
