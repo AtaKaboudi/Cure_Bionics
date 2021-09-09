@@ -47,6 +47,7 @@ router.delete("/:id", (req, res) => {
 // Patient sort on status
 router.get("/status", (req, res) => {
 	let partner_id = req.query.partner_id;
+	console.log(partner_id);
 	let response = {};
 	db.queryPatient_status(0, partner_id, (err, resu) => {
 		if (err) res.send("error");
