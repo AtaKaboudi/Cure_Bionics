@@ -43,11 +43,23 @@ router.delete("/:id", (req, res) => {
 		res.status(200).send(resu);
 	});
 });
+router.get("/group", (req, res) => {
+	if (!req.query.offset || !req.query.limit) {
+		res.send("INPUT ERROR");
+		return;
+	}
+	db.getPartnersGroup(req.query, (err, resu) => {
+		if (err) {
+			res.send("error");
+			return;
+		}
+		res.status(200).send(resu);
+	});
+});
 
 // Patient sort on status
 router.get("/status", (req, res) => {
 	let partner_id = req.query.partner_id;
-	console.log(partner_id);
 	let response = {};
 	db.queryPatient_status(0, partner_id, (err, resu) => {
 		if (err) res.send("error");

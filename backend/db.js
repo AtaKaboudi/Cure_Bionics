@@ -1,5 +1,6 @@
 const mysql = require("mysql");
 const bcrypt = require("bcrypt");
+
 //connect to database
 
 const db = mysql.createConnection({
@@ -46,10 +47,10 @@ function queryPatient_partner_id(partner_id, callback) {
 	);
 }
 
-function insertPatient(req, callback) {
+function insertPatient(body, res, callback) {
 	db.query(
 		"INSERT INTO " + process.env.DATABASE_PATIENT_TABLE + " SET ?",
-		[req],
+		[body],
 		(err, resu) => {
 			callback(err, resu);
 		}
@@ -61,6 +62,7 @@ function updatePatient(params, id, callback) {
 		"UPDATE " + process.env.DATABASE_PATIENT_TABLE + " SET ? WHERE patient_id",
 		[params, id],
 		(err, resu) => {
+			if (err) console.log(err);
 			callback(err, resu);
 		}
 	);
@@ -147,6 +149,16 @@ function queryPartnerRepresentative(partner_id, callback) {
 		}
 	);
 }
+function getPartnersGroup(params, callback) {
+	db.query(
+		"SELECT * FROM " + process.env.DATABASE_PARTNER_TABLE + " LIMIT ?,? ",
+		[parseInt(params.offset), parseInt(params.limit)],
+		(err, resu) => {
+			console.log(err);
+			callback(err, resu);
+		}
+	);
+}
 function insertPartner(req, callback) {
 	db.query(
 		"INSERT INTO " + process.env.DATABASE_PARTNER_TABLE + " SET ?",
@@ -203,6 +215,7 @@ function signUp(params, callback) {
 }
 
 module.exports = {
+	getPartnersGroup,
 	getPatientsGroup,
 	login,
 	signUp,

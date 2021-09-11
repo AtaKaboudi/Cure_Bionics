@@ -1,6 +1,21 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db");
+const path = require("path");
+const multer = require("multer");
+
+const storage = multer.diskStorage({
+	destination: "./upload/",
+	filename: function (req, file, cb) {
+		cb(null, "Scan" + "-" + Date.now() + path.extname(file.originalname));
+	},
+});
+
+const upload = multer({
+	storage: storage,
+});
+
+var multipleUploads = upload.fields([{ name: "scan" }, { name: "limb_photo" }]);
 
 router.get("/", (req, res) => {
 	res.send("patient");
@@ -16,7 +31,6 @@ router.get("/email", (req, res) => {
 });
 
 router.get("/group", (req, res) => {
-	console.log(req.query);
 	if (!req.query.offset || !req.query.limit || !req.query.partner_id) {
 		res.send("INPUT ERROR");
 		return;
@@ -39,11 +53,16 @@ router.get("/id/:id", (req, res) => {
 	});
 });
 
-router.post("/", (req, res) => {
+router.post("/", multipleUploads, (req, res) => {
 	// INPUT VALDIATION
-
-	db.insertPatient(req.body, (err, resu) => {
-		if (err) res.send("error");
+	req.body.scan_url = req.files.scan[0].filename;
+	req.body.limb_photo_url = req.files.limb_photo[0].filename;
+	db.insertPatient(req.body, res, (err, resu) => {
+		if (err) {
+			res.send("error");
+			console.log(err);
+			return;
+		}
 		res.status(200).send(resu);
 	});
 });
