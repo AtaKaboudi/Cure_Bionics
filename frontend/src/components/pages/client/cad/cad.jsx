@@ -8,7 +8,7 @@ import cadCore from "./Interface/script";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import "./cad.scss";
 
-export default function Cad() {
+export default function Cad(props) {
 	useEffect(() => {
 		cadCore();
 	}, []);

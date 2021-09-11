@@ -3,18 +3,34 @@ import "./newPatient.scss";
 import Topbar from "../../admin/topbar/Topbar";
 import Sidebar from "../sidebar/Sidebar";
 import Cad from "../cad/cad";
+import axios from "axios";
 export default function NewPatient() {
 	let [input, setInput] = useState({
-		first_name: "firstName",
+		first_name: "First Name",
 		last_name: "Last Name",
 		email: "Email",
 		phone_number: "Phone_Number",
 		address: "Address",
 		gender: "Gender",
 		amputation_level: "Amputation Level",
-		right_left: "Arm",
+		left_right: "Arm",
+		scan: {},
+		limb_photo: {},
 	});
-	let [scan, setScan] = useState();
+	function handleFormSubmition() {
+		let formData = new FormData();
+		for (var key in input) {
+			formData.append(key, input[key]);
+		}
+
+		axios
+			.post("http://localhost:8080/patient/", formData, {
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			})
+			.then((res) => console.log(res));
+	}
 	return (
 		<div className="newPatient">
 			<Topbar />
@@ -22,7 +38,10 @@ export default function NewPatient() {
 				<Sidebar />
 				<div className="mainPannelContainer">
 					<h1 className="newPatientTitle">New Patient</h1>
-					<form className="newPatientForm">
+					<form
+						className="newPatientForm"
+						method="post"
+						enctype="multipart/form-data">
 						<div className="newPatientItem">
 							<label>First Name</label>
 							<input
@@ -119,7 +138,7 @@ export default function NewPatient() {
 								name="arm"
 								id="active"
 								onChange={(e) => {
-									setInput({ ...input, right_left: e.target.value });
+									setInput({ ...input, left_right: e.target.value });
 								}}>
 								<option value="right">Right</option>
 								<option value="left">Left</option>
@@ -127,14 +146,21 @@ export default function NewPatient() {
 						</div>
 						<div className="newPatientItem">
 							<label>Residual limb photo</label>
-							<input type="file" placeholder="" />
+							<input
+								type="file"
+								placeholder=""
+								onChange={(e) =>
+									setInput({ ...input, limb_photo: e.target.files[0] })
+								}
+							/>
 						</div>
 						<div className="newPatientItem">
 							<label>3D Scan</label>
 							<input
 								type="file"
-								value={scan}
-								onChange={(e) => console.log(e.target.files[0])}
+								onChange={(e) =>
+									setInput({ ...input, scan: e.target.files[0] })
+								}
 							/>
 						</div>
 						<button
@@ -142,7 +168,7 @@ export default function NewPatient() {
 							type="submit"
 							onClick={(e) => {
 								e.preventDefault();
-								console.log(input);
+								handleFormSubmition();
 							}}>
 							Create
 						</button>
@@ -150,7 +176,7 @@ export default function NewPatient() {
 				</div>
 			</div>
 
-			<Cad />
+			<Cad file={input.scan} />
 		</div>
 	);
 }

@@ -15,6 +15,7 @@ export default function UpdatePatient() {
 		last_name: "kaboudi",
 		phone_number: 290000,
 		email: "ata.kaboudi@gmail.com",
+		address: "23,Kedhe Street, ",
 		city: "Sousse",
 		state: "Sousse",
 		country: "Tunisia",
@@ -27,10 +28,10 @@ export default function UpdatePatient() {
 		prostetic_url: "a",
 		amputation_level: "Hand",
 		left_right: "left",
-		size_of_hand: 2,
+		size_of_hand: "B",
 		limb_photo_url: "a",
 		partner_id: "1",
-		comment_: null,
+		comments_: "this is a comment ",
 		status: 1,
 	});
 
@@ -85,6 +86,12 @@ export default function UpdatePatient() {
 										<EmailIcon className="patientShowIcon" />
 										<span className="patientShowInfoTitle">{params.email}</span>
 									</div>
+									<div className="patientShowInfo">
+										<EmailIcon className="patientShowIcon" />
+										<span className="patientShowInfoTitle">
+											{params.address}
+										</span>
+									</div>
 
 									<div className="patientShowInfo">
 										<LocationOnIcon className="patientShowIcon" />
@@ -123,6 +130,12 @@ export default function UpdatePatient() {
 									<div className="patientShowInfo">
 										<span className="patientShowInfoTitle">
 											{params.status === 0 ? "Waiting" : "Equipped"}
+										</span>
+									</div>
+									<span className="patientShowTitle">Comments</span>
+									<div className="patientShowInfo">
+										<span className="patientShowInfoTitle">
+											{params.comments_}
 										</span>
 									</div>
 								</div>
@@ -183,6 +196,18 @@ export default function UpdatePatient() {
 												onClick={() => changeParams({ email: "" })}
 												onChange={(e) =>
 													changeParams({ email: e.target.value })
+												}
+												className="patientUpdateInput"
+											/>
+										</div>
+										<div className="patientUpdateItem">
+											<label>Address</label>
+											<input
+												type="text"
+												value={params.address}
+												onClick={() => changeParams({ address: "" })}
+												onChange={(e) =>
+													changeParams({ address: e.target.value })
 												}
 												className="patientUpdateInput"
 											/>
@@ -278,6 +303,17 @@ export default function UpdatePatient() {
 												}
 												className="patientUpdateInput"
 											/>
+										</div>
+										<div className="patientUpdateItem_Comment">
+											<label> Comments</label>
+											<textarea
+												type="text"
+												value={params.comments_}
+												onClick={() => changeParams({ comments_: "" })}
+												onChange={(e) =>
+													changeParams({ comments_: e.target.value })
+												}
+												className="patientUpdateInput_Comment"></textarea>
 										</div>
 									</div>
 								</form>

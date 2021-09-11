@@ -5,7 +5,7 @@ export default function PatientCard(props) {
 	let params = props.params;
 	return (
 		<div className="featuredPatientCard">
-			<img className="patientShowImg" src={params.image_url} alt="" />
+			<img className="patientShowImg" src={params.photo_url} alt="" />
 			<span className="featuredName">
 				{params.first_name + " " + params.last_name}
 			</span>

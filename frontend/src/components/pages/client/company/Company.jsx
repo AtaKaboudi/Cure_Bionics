@@ -5,10 +5,21 @@ import "./company.scss";
 import PublishIcon from "@material-ui/icons/Publish";
 import Sidebar from "../sidebar/Sidebar";
 import Topbar from "../topbar/Topbar";
-
+import global from "../.env.js";
+import axios from "axios";
 export default function Company() {
 	let [toggle_edit, setToggle_edit] = useState(false);
-	useEffect(() => {}, []);
+	useEffect(() => {
+		axios
+			.get(global.BACKEND + "partner/id/1")
+			.catch(function (error) {
+				console.log(error);
+			})
+			.then(function (res) {
+				setParams(res.data);
+			});
+	}, []);
+
 	let [params, setParams] = useState({
 		company_name: "cure_bionics",
 		representative: "mohamed_dhaoufai",
@@ -55,7 +66,7 @@ export default function Company() {
 							onClick={() => {
 								setToggle_edit(!toggle_edit);
 							}}>
-							<span class="material-icons">edit</span>
+							<span className="material-icons">edit</span>
 						</button>
 						{!toggle_edit ? (
 							<div className="companyShow">
@@ -77,34 +88,34 @@ export default function Company() {
 								<div className="companyShowBottom">
 									<span className="companyShowTitle">Details</span>
 									<div className="companyShowInfo">
-										<span class="material-icons">person</span>{" "}
+										<span className="material-icons">person</span>{" "}
 										<span className="companyShowInfoTitle">
 											{params.representative}
 										</span>
 									</div>
 									<div className="companyShowInfo">
-										<span class="material-icons">call</span>{" "}
+										<span className="material-icons">call</span>{" "}
 										<span className="companyShowInfoTitle">
 											{params.phone_number}
 										</span>
 									</div>
 									<div className="companyShowInfo">
-										<span class="material-icons">email</span>{" "}
+										<span className="material-icons">email</span>{" "}
 										<span className="companyShowInfoTitle">{params.email}</span>
 									</div>
 
 									<div className="companyShowInfo">
-										<span class="material-icons">location_on</span>{" "}
+										<span className="material-icons">location_on</span>{" "}
 										<span className="companyShowInfoTitle">
 											{params.country}
 										</span>
 									</div>
 									<div className="companyShowInfo">
-										<span class="material-icons">location_on</span>{" "}
+										<span className="material-icons">location_on</span>{" "}
 										<span className="companyShowInfoTitle">{params.state}</span>
 									</div>
 									<div className="companyShowInfo">
-										<span class="material-icons">gavel</span>{" "}
+										<span className="material-icons">gavel</span>{" "}
 										<span className="companyShowInfoTitle">
 											{params.legal_structure}
 										</span>
