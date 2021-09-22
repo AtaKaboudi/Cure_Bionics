@@ -195,7 +195,9 @@ function deletePartner(partner_id, callback) {
 
 function login(params, callback) {
 	db.query(
-		"SELECT * FROM " + process.env.DATABASE_PARTNER_TABLE + " WHERE login = ? ",
+		"SELECT partner_id, password   FROM " +
+			process.env.DATABASE_PARTNER_TABLE +
+			" WHERE login = ?  ",
 		[params.login],
 		(err, resu) => {
 			callback(err, resu);

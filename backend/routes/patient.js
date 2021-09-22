@@ -55,6 +55,9 @@ router.get("/id/:id", (req, res) => {
 
 router.post("/", multipleUploads, (req, res) => {
 	// INPUT VALDIATION
+	if (!req.files.scan) {
+		return res.send("Wrong INPUT");
+	}
 	req.body.scan_url = req.files.scan[0].filename;
 	req.body.limb_photo_url = req.files.limb_photo[0].filename;
 	db.insertPatient(req.body, res, (err, resu) => {

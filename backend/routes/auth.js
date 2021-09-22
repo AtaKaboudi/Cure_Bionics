@@ -4,18 +4,24 @@ const db = require("../db");
 const bcrypt = require("bcrypt");
 
 router.get("/", (req, res) => {
-	let { login, password } = req.body;
-	db.login({ login }, (err, resu) => {
-		if (err) res.send("error");
-		console.log(password, resu);
+	let { login, password } = req.query;
+	console.log("[AUTH] Login request");
+	db.login({ login: login }, (err, resu) => {
+		if (err) {
+			return res
 
+				.send({ status: "Error", message: "Internal Server Error" })
+				.status(500);
+		}
 		if (!resu[0]) {
-			res.send("Unknown");
+			res.send({ status: "Error", message: "Invalid Login" });
 			return;
 		}
 		if (bcrypt.compareSync(password, resu[0].password)) {
-			res.send("succesfull Registry");
+			res.json({ partner_id: resu[0].partner_id }).status(200);
+			return;
 		}
+		res.json({ status: "Error", message: "Invalid Password" }).status(403);
 	});
 });
 
