@@ -15,6 +15,18 @@
 	display: flex;
 	flex-direction: row;
 }
+
+label {
+	color: white;
+	width: 100%;
+	padding: 3px;
+	margin-left: 3px;
+}
+span {
+	color: white;
+	font-size: 14px;
+	cursor: pointer;
+}
 #fit {
 	width: 5vw;
 }

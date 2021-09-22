@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./newPatient.scss";
 import Topbar from "../../admin/topbar/Topbar";
 import Sidebar from "../sidebar/Sidebar";
 import Cad from "../cad/cad";
 import axios from "axios";
+
 export default function NewPatient() {
 	let [input, setInput] = useState({
 		first_name: "First Name",
@@ -17,6 +18,7 @@ export default function NewPatient() {
 		scan: {},
 		limb_photo: {},
 	});
+	let [toggle_Cad, setToggle_Cad] = useState(false);
 	function handleFormSubmition() {
 		let formData = new FormData();
 		for (var key in input) {
@@ -169,6 +171,7 @@ export default function NewPatient() {
 							onClick={(e) => {
 								e.preventDefault();
 								handleFormSubmition();
+								setToggle_Cad(true);
 							}}>
 							Create
 						</button>
@@ -176,7 +179,7 @@ export default function NewPatient() {
 				</div>
 			</div>
 
-			<Cad file={input.scan} />
+			{toggle_Cad ? <Cad file={input.scan} /> : ""}
 		</div>
 	);
 }

@@ -1,4 +1,3 @@
-import "./style.css";
 import init from "./init";
 import { rotateY } from "./animate";
 import { loadOBJ } from "../core";
@@ -47,11 +46,11 @@ export default function cadCore() {
 		rotateY(object, view);
 	});
 
-	function sliceGeometry() {
+	function sliceGeometry(UPlane, DPlane) {
 		let objectGeometry = arm.children[0].geometry;
 
-		let sliced = slice(objectGeometry, 0.02, -0.2);
-
+		let sliced = slice(objectGeometry, UPlane, DPlane);
+		// 0.02,-0.2
 		/* Hand Mold */
 		let moldGeometry = sliced.section;
 
@@ -67,29 +66,53 @@ export default function cadCore() {
 	}
 
 	document.getElementById("engrave").addEventListener("click", () => {
-		let a = engraveGeometry(mold);
-		a.translateX(0.5);
-		scene.Add(a);
+		engraveGeometry(mold);
 	});
 	document.getElementById("computeCylinder").addEventListener("click", () => {
 		cylinder = setCylinderParams(mold.geometry, m);
 		scene.add(cylinder);
 	});
 	function setSliceAxis() {
-		/*
+		let UPlane_Ycoordinate = 0;
+		let DPlane_Ycoordinate = 0;
 		const UplaneG = new THREE.PlaneGeometry(0.5, 0.5);
 		const Uplane = new THREE.Mesh(UplaneG, m);
-		Uplane.translateX(0.3);
-		Uplane.rotateX(DegToEuler(90));
+		Uplane.translateX(-0.5);
+		Uplane.rotateX(-Math.PI * 0.5);
 		scene.add(Uplane);
-		*/
+		const DplaneG = new THREE.PlaneGeometry(0.5, 0.5);
+		const Dplane = new THREE.Mesh(DplaneG, m);
+		Dplane.translateX(-0.5);
+		Dplane.rotateX(-Math.PI * 0.5);
+		scene.add(Dplane);
+		document.getElementById("upperPlaneUp").addEventListener("click", () => {
+			Uplane.translateZ(0.01);
+			UPlane_Ycoordinate += 0.01;
+			renderer.render(scene, camera);
+		});
+		document.getElementById("upperPlaneDown").addEventListener("click", () => {
+			Uplane.translateZ(-0.01);
+			UPlane_Ycoordinate -= 0.01;
+			renderer.render(scene, camera);
+		});
+		document.getElementById("lowerPlaneUp").addEventListener("click", () => {
+			Dplane.translateZ(0.01);
+			DPlane_Ycoordinate += 0.01;
+			renderer.render(scene, camera);
+		});
+		document.getElementById("lowerPlaneDown").addEventListener("click", () => {
+			Dplane.translateZ(-0.01);
+			DPlane_Ycoordinate -= 0.01;
+			renderer.render(scene, camera);
+		});
+		document.getElementById("confirmSlice").addEventListener("click", () => {
+			sliceGeometry(UPlane_Ycoordinate, DPlane_Ycoordinate);
+		});
 	}
-	function DegToEuler(nb) {
-		return (nb / (2 * Math.PI)) * 360;
-	}
+
 	document.getElementById("slice").addEventListener("click", () => {
 		setSliceAxis();
-		sliceGeometry();
+		//	sliceGeometry();
 	});
 
 	document.getElementById("measure").addEventListener("click", () => {

@@ -11,6 +11,7 @@ import "./cad.scss";
 export default function Cad(props) {
 	useEffect(() => {
 		cadCore();
+		window.scrollTo(300, 2500);
 	}, []);
 	return (
 		<div className="cadContainer">
@@ -25,6 +26,24 @@ export default function Cad(props) {
 			</div>{" "}
 			<div id="ops">
 				<button id="slice">Slice </button>
+				<div id="sliceParams">
+					<label>UpperPlane</label>
+					<span id="upperPlaneUp" class="material-icons">
+						expand_less
+					</span>
+					<span id="upperPlaneDown" class="material-icons">
+						expand_more
+					</span>
+					<label>LowerPlane</label>
+					<span id="lowerPlaneUp" class="material-icons">
+						expand_less
+					</span>
+					<span id="lowerPlaneDown" class="material-icons">
+						expand_more
+					</span>
+				</div>
+				<button id="confirmSlice">confirm Slice </button>
+
 				<button id="measure">Measure</button>
 				<button id="computeCylinder">Cylinder</button>
 				<button id="engrave">Engrave</button>

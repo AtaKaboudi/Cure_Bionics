@@ -89,6 +89,7 @@ export async function loadOBJ(SOURCE_URL, statusElement, callback) {
 
 		// called when loading has errors
 		function (error) {
+			console.log("[OBJ Loader]");
 			console.trace(error);
 		}
 	);
