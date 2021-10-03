@@ -60,14 +60,15 @@ export default function AdminHome() {
 			});
 	}, []);
 	let [overview, setOverview] = useState({
-		waiting: 2,
-		fitted: 2,
+		waiting: 0,
+		fitted: 0,
 	});
 	return (
 		<div className="adminHome">
 			<TopBar />
 			<div className="mainSection">
 				<AdminSidebar />
+
 				<div className="adminMainPannelContainer">
 					<div className="partnerOverview">
 						<div className="featuredItem">

@@ -1,5 +1,5 @@
 import "./signup.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import logoPng from "../../../../cure.png";
 import global from "../.env";
@@ -7,88 +7,62 @@ import axios from "axios";
 import ChangePassword from "./changePassword/changePassword";
 
 export default function Signup() {
-	let [loginInput, setLoginInput] = useState({
-		login: "Login",
-		password: "Password",
-		cureId: " Cure ID",
+	let [email, setEmail] = useState("Email");
+	let [togglePassword, setTogglePassword] = useState({
+		state: false,
 	});
-	let [toggleChangePassword, setToggleChangePasword] = useState(false);
-	let history = useHistory();
+	let passwordInput = {};
 
-	function loginRequest() {
+	function checkEmailRequest() {
 		axios
-			.get(global.BACKEND + "auth/", {
-				headers: {
-					"Content-Type": "multipart/form-data",
+			.get("http://localhost:8080/auth/email", {
+				params: {
+					email: email,
 				},
-				params: loginInput,
+				headers: {
+					"Content-Type": "application/json",
+				},
 			})
 			.then((res) => {
-				let url = "";
-				console.log(res);
-				if (res.data.status !== "Error") {
-					if (res.data.partner_id !== 0) {
-						url = "/partner";
-					} else {
-						url = "/admin";
-					}
-					history.push(url);
-					localStorage.setItem("token", res.data.partner_id);
-				} else {
-					document.getElementById("errorPrompt").innerHTML = "Try Again";
-				}
+				passwordInput = res.data;
+				console.log(passwordInput);
+				setTogglePassword({
+					state: true,
+					...res.data,
+				});
 			});
 	}
+
 	return (
 		<div className="signup">
 			<img alt="logo" src={logoPng} />
 			<h1>digibionics</h1>
 			<h2>Partner</h2>
-			{!toggleChangePassword ? (
+
+			{!togglePassword.state ? (
 				<form>
 					<h1>Sign In</h1>
 					<input
 						type="text"
-						placeholder={loginInput.login}
-						onClick={() => setLoginInput({ ...loginInput, login: "" })}
+						placeholder={email}
+						onClick={() => setEmail("")}
 						onChange={(e) => {
-							setLoginInput({ ...loginInput, login: e.target.value });
+							setEmail(e.target.value);
 						}}
 					/>
-					<input
-						type="password"
-						placeholder={loginInput.password}
-						onClick={() => () => setLoginInput({ ...loginInput, password: "" })}
-						onChange={(e) => {
-							setLoginInput({ ...loginInput, password: e.target.value });
-						}}
-					/>
-					<input
-						type="id"
-						placeholder={loginInput.cureId}
-						onClick={() => setLoginInput({ ...loginInput, cureId: "" })}
-						onChange={(e) => {
-							setLoginInput({ ...loginInput, cureId: e.target.value });
-						}}
-					/>
+
 					<button
 						onClick={(e) => {
 							e.preventDefault();
-							loginRequest();
+							checkEmailRequest();
 						}}>
 						Login
 						<span className="material-icons">chevron_right</span>
 					</button>
 					<label id="errorPrompt"> </label>
-					<label
-						onClick={() => {
-							setToggleChangePasword(!toggleChangePassword);
-						}}>
-						Change Password
-					</label>
 				</form>
 			) : (
-				<ChangePassword />
+				<ChangePassword input={togglePassword} />
 			)}
 		</div>
 	);
