@@ -192,6 +192,28 @@ function deletePartner(partner_id, callback) {
 		}
 	);
 }
+function checkEmail(email, callback) {
+	db.query(
+		"SELECT partner_id, password   FROM " +
+			process.env.DATABASE_PARTNER_TABLE +
+			" WHERE email = ?  ",
+		[email],
+		(err, resu) => {
+			callback(err, resu);
+		}
+	);
+}
+function updatePassword(params, callback) {
+	db.query(
+		"UPDATE " +
+			process.env.DATABASE_PARTNER_TABLE +
+			" SET password = ? WHERE partner_id = ?",
+		[params.password, params.partner_id],
+		(err, resu) => {
+			callback(err, resu);
+		}
+	);
+}
 
 function login(params, callback) {
 	db.query(
@@ -217,6 +239,8 @@ function signUp(params, callback) {
 }
 
 module.exports = {
+	updatePassword,
+	checkEmail,
 	getPartnersGroup,
 	getPatientsGroup,
 	login,
