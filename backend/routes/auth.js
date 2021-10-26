@@ -7,9 +7,8 @@ router.get("/email", (req, res) => {
 	db.checkEmail(email, (err, resu) => {
 		if (err) {
 			return res
-
-				.send({ status: "Error", message: "Internal Server Error" })
-				.status(500);
+				.status(500)
+				.send({ status: "Error", message: "Internal Server Error" });
 		}
 		if (resu.length == 0) {
 			return res
@@ -24,25 +23,28 @@ router.get("/email", (req, res) => {
 		res.status(200).json({ partner_id: resu[0].partner_id, firstTime: false });
 	});
 });
-router.post("/password", (req, res) => {
+router.post("/password", async (req, res) => {
 	let { partner_id, password } = req.body;
-	db.updatePassword(
-		{ partner_id: partner_id, password: password },
-		(err, resu) => {
-			if (err) {
-				return res
-					.send({ status: "Error", message: "Internal Server Error" })
-					.status(500);
+	let salt = await bcrypt.genSalt(15);
+	bcrypt.hash(password, salt, (err, passwordHash) => {
+		db.updatePassword(
+			{ partner_id: partner_id, password: passwordHash },
+			(err, resu) => {
+				if (err) {
+					return res
+						.send({ status: "Error", message: "Internal Server Error" })
+						.status(500);
+				}
+				if (resu.affectedRows >= 1) {
+					return res.status(200).json({ status: "Success" });
+				} else res.status(200).json({ status: "Failed" });
 			}
-			if (resu.affectedRows >= 1) {
-				return res.status(200).json({ message: "Success" });
-			} else res.status(200).json({ message: "Failed" });
-		}
-	);
+		);
+	});
 });
-router.get("/password", (req, res) => {
-	let { login, password } = req.query;
-	db.login({ login: login }, (err, resu) => {
+router.get("/password", async (req, res) => {
+	let { partner_id, password } = req.query;
+	db.login({ partner_id: partner_id }, async (err, resu) => {
 		if (err) {
 			return res
 
@@ -50,14 +52,17 @@ router.get("/password", (req, res) => {
 				.status(500);
 		}
 		if (!resu[0]) {
-			res.send({ status: "Error", message: "Invalid Login" });
-			return;
+			return res.send({ status: "Error", message: "Invalid Login" });
 		}
-		if (bcrypt.compareSync(password, resu[0].password)) {
-			res.json({ partner_id: resu[0].partner_id }).status(200);
-			return;
-		}
-		res.json({ status: "Error", message: "Invalid Password" }).status(403);
+		bcrypt.compare(password, resu[0].password, (err, resu) => {
+			if (resu) {
+				return res.status(200).json({ status: "Success" });
+			} else {
+				return res
+					.status(403)
+					.json({ status: "Failed", message: "WROND_PASSWORD" });
+			}
+		});
 	});
 });
 

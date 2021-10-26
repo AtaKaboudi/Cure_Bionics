@@ -164,7 +164,6 @@ function insertPartner(req, callback) {
 		"INSERT INTO " + process.env.DATABASE_PARTNER_TABLE + " SET ?",
 		[req],
 		(err, resu) => {
-			console.log(err);
 			callback(err, resu);
 		}
 	);
@@ -219,8 +218,8 @@ function login(params, callback) {
 	db.query(
 		"SELECT partner_id, password   FROM " +
 			process.env.DATABASE_PARTNER_TABLE +
-			" WHERE login = ?  ",
-		[params.login],
+			" WHERE partner_id = ?  ",
+		[params.partner_id],
 		(err, resu) => {
 			callback(err, resu);
 		}
