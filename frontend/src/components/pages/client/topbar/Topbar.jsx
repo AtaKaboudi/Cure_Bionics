@@ -16,21 +16,6 @@ export default function Topbar() {
 				<div className="centerText">
 					<h2> Digibionics</h2>
 				</div>
-				<div className="topRight">
-					<div className="topbarIconContainer">
-						<DashboardIcon />
-						<span className="topIconBadge"></span>
-					</div>
-
-					<div className="topbarIconContainer">
-						<SettingsIcon />
-					</div>
-					<img
-						src="https://img.freepik.com/photos-gratuite/portrait-homme-blanc-isole_53876-40306.jpg?size=626&ext=jpg"
-						alt=""
-						className="topAvatar"
-					/>
-				</div>
 			</div>
 		</div>
 	);

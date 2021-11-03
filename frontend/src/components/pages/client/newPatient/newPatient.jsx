@@ -20,6 +20,7 @@ export default function NewPatient() {
 	});
 	let [toggle_Cad, setToggle_Cad] = useState(false);
 	function handleFormSubmition() {
+		setInput({ ...input, partner_id: localStorage.getItem("partner_id") });
 		let formData = new FormData();
 		for (var key in input) {
 			formData.append(key, input[key]);
@@ -31,7 +32,12 @@ export default function NewPatient() {
 					"Content-Type": "multipart/form-data",
 				},
 			})
-			.then((res) => console.log(res));
+			.then((res) => {
+				console.log("[NEW PATIENT] Successfull Registration");
+			})
+			.catch((err) => {
+				alert(err);
+			});
 	}
 	return (
 		<div className="newPatient">
@@ -49,7 +55,7 @@ export default function NewPatient() {
 							<input
 								onClick={() => setInput({ ...input, first_name: "" })}
 								onChange={(e) =>
-									setInput({ ...input, firts_name: e.target.value })
+									setInput({ ...input, first_name: e.target.value })
 								}
 								type="text"
 								placeholder={input.first_name}

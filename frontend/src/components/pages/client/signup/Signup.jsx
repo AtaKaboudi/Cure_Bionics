@@ -25,11 +25,14 @@ export default function Signup() {
 			})
 			.then((res) => {
 				passwordInput = res.data;
-				console.log(passwordInput);
+				console.log(res.data);
 				setTogglePassword({
 					state: true,
 					...res.data,
 				});
+			})
+			.catch((err) => {
+				window.location.reload();
 			});
 	}
 

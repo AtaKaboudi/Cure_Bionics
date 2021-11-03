@@ -27,7 +27,6 @@
 
 		.partnerUpdateForm {
 			display: flex;
-			justify-content: space-between;
 			margin-top: 40px;
 			flex-direction: column;
 
@@ -50,6 +49,8 @@
 					height: 30px;
 					border-bottom: 1px solid gray;
 					font-family: "Source Sans Pro", sans-serif;
+					margin-top: 2vh;
+					margin-left: 1vw;
 				}
 			}
 		}
@@ -57,14 +58,15 @@
 		.partnerUpdateUpload {
 			display: flex;
 			flex-direction: column;
-			justify-content: space-evenly;
-
+			padding-top: 20%;
+			margin-left: 4vw;
 			.partnerUpdateImg {
 				width: 100px;
 				height: 100px;
 				border-radius: 10px;
 				object-fit: cover;
 				margin-right: 20px;
+				margin-bottom: 4vh;
 			}
 
 			.partnerUpdateButton {
@@ -78,6 +80,16 @@
 				color: white;
 				font-weight: 600;
 				cursor: pointer;
+			}
+			#saveButton {
+				color: white;
+				margin-top: 15vh;
+				border: none;
+				padding: 5px;
+				font-size: 16px;
+				cursor: pointer;
+				border-radius: 2px;
+				background-color: rgb(57, 57, 211);
 			}
 		}
 	}

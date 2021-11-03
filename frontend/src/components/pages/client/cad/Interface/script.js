@@ -10,7 +10,6 @@ import {
 } from "../core";
 
 import * as THREE from "three";
-import { CylinderBufferGeometry } from "three";
 
 export default function cadCore() {
 	const SOURCE_URL = "http://127.0.0.1:8887/model.obj";
@@ -18,12 +17,12 @@ export default function cadCore() {
 
 	// DEFAULT MESHES PARAMS
 	const m = new THREE.MeshPhongMaterial({
-		color: 0xffffff, // red (can also use a CSS color string here)
+		color: 0xffffff,
 		flatShading: true,
 	});
 	m.side = THREE.DoubleSide;
 	const r = new THREE.MeshPhongMaterial({
-		color: 0xff0000, // red (can also use a CSS color string here)
+		color: 0xff0000,
 		flatShading: true,
 	});
 	r.side = THREE.DoubleSide;
@@ -75,16 +74,19 @@ export default function cadCore() {
 	function setSliceAxis() {
 		let UPlane_Ycoordinate = 0;
 		let DPlane_Ycoordinate = 0;
+
 		const UplaneG = new THREE.PlaneGeometry(0.5, 0.5);
 		const Uplane = new THREE.Mesh(UplaneG, m);
 		Uplane.translateX(-0.5);
 		Uplane.rotateX(-Math.PI * 0.5);
 		scene.add(Uplane);
+
 		const DplaneG = new THREE.PlaneGeometry(0.5, 0.5);
 		const Dplane = new THREE.Mesh(DplaneG, m);
 		Dplane.translateX(-0.5);
 		Dplane.rotateX(-Math.PI * 0.5);
 		scene.add(Dplane);
+
 		document.getElementById("upperPlaneUp").addEventListener("click", () => {
 			Uplane.translateZ(0.01);
 			UPlane_Ycoordinate += 0.01;
@@ -105,6 +107,7 @@ export default function cadCore() {
 			DPlane_Ycoordinate -= 0.01;
 			renderer.render(scene, camera);
 		});
+
 		document.getElementById("confirmSlice").addEventListener("click", () => {
 			sliceGeometry(UPlane_Ycoordinate, DPlane_Ycoordinate);
 		});
@@ -112,7 +115,6 @@ export default function cadCore() {
 
 	document.getElementById("slice").addEventListener("click", () => {
 		setSliceAxis();
-		//	sliceGeometry();
 	});
 
 	document.getElementById("measure").addEventListener("click", () => {

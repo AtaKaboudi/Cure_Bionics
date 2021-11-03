@@ -6,26 +6,46 @@
 #ops button {
 	background: none;
 	border: none;
-	border-bottom: 1px solid #bdbdbd;
-	font-size: 14px;
+	font-size: 12px;
 	font-family: "Quicksand";
 	color: white;
 	cursor: pointer;
 	padding: 2px;
 	display: flex;
 	flex-direction: row;
+	margin-top: 3px;
 }
 
+#slicePannel {
+	display: none;
+}
+#slicePannel label {
+	font-size: 12px;
+}
+.slicePlaneWrapper {
+	display: inline-flex;
+	flex-direction: column;
+}
+.row {
+	display: inline-flex;
+	flex-direction: row;
+	margin-left: 40%;
+}
 label {
 	color: white;
 	width: 100%;
 	padding: 3px;
 	margin-left: 3px;
+	margin-bottom: 5px;
 }
-#sliceParams span {
+#slicePannel span {
 	color: white;
-	font-size: 14px;
+	font-size: 16px;
 	cursor: pointer;
+}
+#confirmSlice {
+	margin-top: 15px;
+	margin-left: 10px;
 }
 
 #fit {

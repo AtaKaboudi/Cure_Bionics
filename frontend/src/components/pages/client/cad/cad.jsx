@@ -13,6 +13,9 @@ export default function Cad(props) {
 		cadCore();
 		window.scrollTo(300, 2500);
 	}, []);
+	document.getElementById("slice").addEventListener("click", () => {
+		document.getElementById("slicePannel").style.display = "flex";
+	});
 	return (
 		<div className="cadContainer">
 			<canvas id="canva"></canvas>
@@ -25,29 +28,50 @@ export default function Cad(props) {
 				<h1 id="z">z</h1>
 			</div>{" "}
 			<div id="ops">
-				<button id="slice">Slice </button>
-				<div id="sliceParams">
-					<label>UpperPlane</label>
-					<span id="upperPlaneUp" class="material-icons">
-						expand_less
-					</span>
-					<span id="upperPlaneDown" class="material-icons">
-						expand_more
-					</span>
-					<label>LowerPlane</label>
-					<span id="lowerPlaneUp" class="material-icons">
-						expand_less
-					</span>
-					<span id="lowerPlaneDown" class="material-icons">
-						expand_more
-					</span>
-				</div>
-				<button id="confirmSlice">confirm Slice </button>
+				<button id="slice" title="slice">
+					<span class="material-icons">content_cut</span>{" "}
+				</button>
+				<div id="slicePannel">
+					<div className="slicePlaneWrapper">
+						<div className="row">
+							<span id="upperPlaneUp" class="material-icons">
+								expand_less
+							</span>
+							<span id="upperPlaneDown" class="material-icons">
+								expand_more
+							</span>
+						</div>
+						<label>UpperPlane</label>
+					</div>
+					<div className="slicePlaneWrapper">
+						<div className="row">
+							<span id="lowerPlaneUp" class="material-icons">
+								expand_less
+							</span>
+							<span id="lowerPlaneDown" class="material-icons">
+								expand_more
+							</span>
+						</div>
+						<label>LowerPlane</label>
+					</div>
 
-				<button id="measure">Measure</button>
-				<button id="computeCylinder">Cylinder</button>
-				<button id="engrave">Engrave</button>
+					<button id="confirmSlice" title="confirm">
+						<span class="material-icons">check</span>{" "}
+					</button>
+				</div>
+
+				<button id="measure" title="Measure">
+					<span class="material-icons">straighten</span>{" "}
+				</button>
+				<button id="computeCylinder" title="Add Cylinder">
+					<span class="material-icons">radio_button_unchecked</span>
+				</button>
+				<button id="engrave" title="Engrave">
+					<span class="material-icons">carpenter</span>
+				</button>
 			</div>
 		</div>
 	);
 }
+/*
+ */
