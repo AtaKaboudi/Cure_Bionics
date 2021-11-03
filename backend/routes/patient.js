@@ -17,10 +17,6 @@ const upload = multer({
 
 var multipleUploads = upload.fields([{ name: "scan" }, { name: "limb_photo" }]);
 
-router.get("/", (req, res) => {
-	res.send("patient");
-});
-
 router.get("/email", (req, res) => {
 	let email = req.body.email;
 
@@ -32,12 +28,12 @@ router.get("/email", (req, res) => {
 
 router.get("/group", (req, res) => {
 	if (!req.query.offset || !req.query.limit || !req.query.partner_id) {
-		res.send("INPUT ERROR");
+		res.status(400).send("INPUT ERROR");
 		return;
 	}
 	db.getPatientsGroup(req.query, (err, resu) => {
 		if (err) {
-			res.send("error");
+			res.status(400).send("error");
 			return;
 		}
 		res.status(200).send(resu);
@@ -58,12 +54,12 @@ router.post("/", multipleUploads, (req, res) => {
 	if (!req.files.scan) {
 		return res.send("Wrong INPUT");
 	}
+
 	req.body.scan_url = req.files.scan[0].filename;
 	req.body.limb_photo_url = req.files.limb_photo[0].filename;
 	db.insertPatient(req.body, res, (err, resu) => {
 		if (err) {
-			res.send("error");
-			console.log(err);
+			res.status(500).send("error");
 			return;
 		}
 		res.status(200).send(resu);

@@ -226,8 +226,6 @@ function login(params, callback) {
 	);
 }
 function signUp(params, callback) {
-	console.log(params);
-
 	db.query(
 		"INSERT INTO " + process.env.DATABASE_PARTNER_TABLE + " SET ?",
 		[params],
