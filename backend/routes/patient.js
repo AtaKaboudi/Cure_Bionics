@@ -27,7 +27,7 @@ router.get("/email", (req, res) => {
 });
 
 router.get("/group", (req, res) => {
-	if (!req.query.offset || !req.query.limit || !req.query.partner_id) {
+	if (!req.query.offset || !req.query.partner_id) {
 		res.status(400).send("INPUT ERROR");
 		return;
 	}
@@ -42,7 +42,6 @@ router.get("/group", (req, res) => {
 
 router.get("/id/:id", (req, res) => {
 	let id = req.params.id;
-
 	db.queryPatient_id(id, (err, resu) => {
 		if (err) res.send("error");
 		res.status(200).send(resu);

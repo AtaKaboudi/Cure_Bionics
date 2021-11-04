@@ -105,12 +105,11 @@ function queryAllPatient_status(status, callback) {
 }
 function getPatientsGroup(params, callback) {
 	db.query(
-		"  SELECT first_name,last_name,photo_url FROM " +
+		"  SELECT patient_id,first_name,last_name,photo_url FROM " +
 			process.env.DATABASE_PATIENT_TABLE +
-			" WHERE partner_id = ?  LIMIT ?, ?",
-		[params.partner_id, parseInt(params.offset), parseInt(params.limit)],
+			" WHERE partner_id = ? ",
+		[params.partner_id, parseInt(params.offset)],
 		(err, resu) => {
-			console.log(err);
 			callback(err, resu);
 		}
 	);
