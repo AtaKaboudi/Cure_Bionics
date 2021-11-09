@@ -2,20 +2,6 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db");
 const path = require("path");
-const multer = require("multer");
-
-const storage = multer.diskStorage({
-	destination: "./upload/",
-	filename: function (req, file, cb) {
-		cb(null, "Scan" + "-" + Date.now() + path.extname(file.originalname));
-	},
-});
-
-const upload = multer({
-	storage: storage,
-});
-
-var multipleUploads = upload.fields([{ name: "scan" }, { name: "limb_photo" }]);
 
 router.get("/email", (req, res) => {
 	let email = req.body.email;
@@ -48,14 +34,9 @@ router.get("/id/:id", (req, res) => {
 	});
 });
 
-router.post("/", multipleUploads, (req, res) => {
-	// INPUT VALDIATION
-	if (!req.files.scan) {
-		return res.send("Wrong INPUT");
-	}
-
-	req.body.scan_url = req.files.scan[0].filename;
-	req.body.limb_photo_url = req.files.limb_photo[0].filename;
+router.post("/", (req, res) => {
+	console.log(req);
+	return;
 	db.insertPatient(req.body, res, (err, resu) => {
 		if (err) {
 			res.status(500).send("error");

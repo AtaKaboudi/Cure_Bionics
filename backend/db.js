@@ -52,6 +52,7 @@ function insertPatient(body, res, callback) {
 		"INSERT INTO " + process.env.DATABASE_PATIENT_TABLE + " SET ?",
 		[body],
 		(err, resu) => {
+			console.log(err);
 			callback(err, resu);
 		}
 	);

@@ -5,11 +5,11 @@ const bodyparser = require("body-parser");
 
 //ENVIRONNMENT CNFIG
 require("dotenv").config();
-
+console.log(require.cache);
 app.use(cors());
 
 //Body access
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/patient", require("./routes/patient"));
