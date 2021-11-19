@@ -4,8 +4,13 @@ import Topbar from "../../admin/topbar/Topbar";
 import Sidebar from "../sidebar/Sidebar";
 import Cad from "../cad/cad";
 import axios from "axios";
+import { uploadCloud } from "../firebase/firebase.js";
+import Coin from "react-cssfx-loading/lib/Coin";
 
 export default function NewPatient() {
+	let [scanCloudURL, setScanCloudURL] = useState("");
+	let [toggle_Cad, setToggle_Cad] = useState(false);
+	let [displayLoader, setDisplayLoader] = useState(false);
 	let [input, setInput] = useState({
 		first_name: "First Name",
 		last_name: "Last Name",
@@ -15,29 +20,67 @@ export default function NewPatient() {
 		gender: "Gender",
 		amputation_level: "Amputation Level",
 		left_right: "Arm",
-		scan: {},
-		limb_photo: {},
+		status: 0,
+		photoFile: {},
+		scanFile: {},
+		limb_photoFile: {},
 	});
-	let [toggle_Cad, setToggle_Cad] = useState(false);
-	function handleFormSubmition() {
-		setInput({ ...input, partner_id: localStorage.getItem("partner_id") });
-		let formData = new FormData();
-		for (var key in input) {
-			formData.append(key, input[key]);
-		}
 
-		axios
-			.post("http://localhost:8080/patient/", formData, {
-				headers: {
-					"Content-Type": "multipart/form-data",
-				},
-			})
-			.then((res) => {
-				console.log("[NEW PATIENT] Successfull Registration");
-			})
-			.catch((err) => {
-				alert(err);
+	async function handleFormSubmition() {
+		//VALIDATION
+		/*
+		if (
+			!input.scanFile ||
+			!input.limb_photoFile ||
+			!input.photoFile ||
+			input.first_name === "First Name" ||
+			input.first_name === "" ||
+			input.last_name === "Last Name" ||
+			input.last_name === "" ||
+			input.email === "Email" ||
+			input.email === ""
+		)
+			return alert("missing fields");
+			*/
+
+		//Display Loder
+		setDisplayLoader(true);
+
+		// CLOUD UPLOAD
+		/*
+		uploadCloud(input.scanFile, "SCAN", (scanURL) => {
+			setScanCloudURL(scanURL);
+			uploadCloud(input.limb_photoFile, "LIMB", (limbURL) => {
+				uploadCloud(input.photoFile, "PHOTO", (photoURL) => {
+					// REQ BODY FORMATTING
+					input["scan_url"] = scanURL;
+					input["limb_photo_url"] = limbURL;
+					input["photo_url"] = photoURL;
+					input["partner_id"] = localStorage.getItem("partner_id");
+
+					delete input.scanFile;
+					delete input.limb_photoFile;
+					delete input.photoFile;
+					
+					axios
+						.post("http://localhost:8080/patient/", input, {
+							headers: {
+								"Content-Type": "application/json",
+							},
+						})
+						.then((res) => {
+							console.log("[NEW PATIENT] Successfull Registration");
+							setDisplayLoader(false);
+							setToggle_Cad(true);
+						})
+						.catch((err) => {
+							alert(err);
+						});
+						
+				});
 			});
+		});
+		*/
 	}
 	return (
 		<div className="newPatient">
@@ -49,7 +92,7 @@ export default function NewPatient() {
 					<form
 						className="newPatientForm"
 						method="post"
-						enctype="multipart/form-data">
+						encType="multipart/form-data">
 						<div className="newPatientItem">
 							<label>First Name</label>
 							<input
@@ -153,12 +196,22 @@ export default function NewPatient() {
 							</select>
 						</div>
 						<div className="newPatientItem">
+							<label>Patient Photo</label>
+							<input
+								type="file"
+								placeholder=""
+								onChange={(e) =>
+									setInput({ ...input, photoFile: e.target.files[0] })
+								}
+							/>
+						</div>
+						<div className="newPatientItem">
 							<label>Residual limb photo</label>
 							<input
 								type="file"
 								placeholder=""
 								onChange={(e) =>
-									setInput({ ...input, limb_photo: e.target.files[0] })
+									setInput({ ...input, limb_photoFile: e.target.files[0] })
 								}
 							/>
 						</div>
@@ -166,9 +219,9 @@ export default function NewPatient() {
 							<label>3D Scan</label>
 							<input
 								type="file"
-								onChange={(e) =>
-									setInput({ ...input, scan: e.target.files[0] })
-								}
+								onChange={(e) => {
+									setInput({ ...input, scanFile: e.target.files[0] });
+								}}
 							/>
 						</div>
 						<button
@@ -181,11 +234,18 @@ export default function NewPatient() {
 							}}>
 							Create
 						</button>
+						{displayLoader ? (
+							<div id="loaderContainer">
+								<Coin width="10px" height="10px" />
+							</div>
+						) : (
+							""
+						)}
 					</form>
 				</div>
 			</div>
 
-			{toggle_Cad ? <Cad file={input.scan} /> : ""}
+			{toggle_Cad ? <Cad file={scanCloudURL} /> : ""}
 		</div>
 	);
 }

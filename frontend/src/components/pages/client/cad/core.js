@@ -4,7 +4,7 @@ import { CSG } from "three-csg-ts";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 
 const EPSILON = 0.001;
-const CYLINDER_RADIUS_INDEX = 0.005;
+const CYLINDER_RADIUS_INDEX = 0.008;
 export function slice(geometry, UyPlane, LyPlane) {
 	const g = new THREE.BufferGeometry();
 
@@ -49,9 +49,7 @@ export function slice(geometry, UyPlane, LyPlane) {
 	g.cureParams = {};
 	g.cureParams = { upperPlane: UyPlane, lowerPlane: LyPlane };
 
-	return {
-		section: g,
-	};
+	return g;
 }
 
 export function engrave(objectA, objectB) {
@@ -71,11 +69,12 @@ export function engrave(objectA, objectB) {
 export async function loadOBJ(SOURCE_URL, statusElement, callback) {
 	// instantiate a loader
 	const loader = new OBJLoader();
+	console.log(SOURCE_URL);
 
 	// load a resource
 	loader.load(
 		// resource URL
-		SOURCE_URL,
+		"http://127.0.0.1:8887/model.obj",
 
 		// called when resource is loaded
 		function (object) {
@@ -89,8 +88,8 @@ export async function loadOBJ(SOURCE_URL, statusElement, callback) {
 
 		// called when loading has errors
 		function (error) {
-			console.log("[OBJ Loader]");
-			console.trace(error);
+			console.log("[OBJ Loader] Error");
+			//console.trace(error);
 		}
 	);
 }

@@ -19,9 +19,8 @@ router.get("/id/:id", (req, res) => {
 
 router.post("/", (req, res) => {
 	// INPUT VALDIATION
-	return;
 	db.insertPartner(req.body, (err, resu) => {
-		if (err) res.send("error");
+		if (err) res.status(500).send("error");
 		res.status(200).send(resu);
 	});
 });

@@ -52,7 +52,6 @@ function insertPatient(body, res, callback) {
 		"INSERT INTO " + process.env.DATABASE_PATIENT_TABLE + " SET ?",
 		[body],
 		(err, resu) => {
-			console.log(err);
 			callback(err, resu);
 		}
 	);
@@ -60,8 +59,10 @@ function insertPatient(body, res, callback) {
 
 function updatePatient(params, id, callback) {
 	db.query(
-		"UPDATE " + process.env.DATABASE_PATIENT_TABLE + " SET ? WHERE patient_id",
-		[params, id],
+		"UPDATE " +
+			process.env.DATABASE_PATIENT_TABLE +
+			" SET ? WHERE patient_id = ?",
+		[params, parseInt(id)],
 		(err, resu) => {
 			if (err) console.log(err);
 			callback(err, resu);
@@ -164,6 +165,7 @@ function insertPartner(req, callback) {
 		"INSERT INTO " + process.env.DATABASE_PARTNER_TABLE + " SET ?",
 		[req],
 		(err, resu) => {
+			console.log(err);
 			callback(err, resu);
 		}
 	);
@@ -171,7 +173,9 @@ function insertPartner(req, callback) {
 
 function updatePartner(params, id, callback) {
 	db.query(
-		"UPDATE " + process.env.DATABASE_PARTNER_TABLE + " SET ? WHERE partner_id",
+		"UPDATE " +
+			process.env.DATABASE_PARTNER_TABLE +
+			" SET ? WHERE partner_id = ?",
 		[params, id],
 		(err, resu) => {
 			console.log(err);

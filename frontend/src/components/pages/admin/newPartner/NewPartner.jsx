@@ -5,33 +5,41 @@ import Topbar from "../../admin/topbar/Topbar";
 import AdminSidebar from "../../admin/adminSidebar/AdminSidebar";
 import { useState } from "react";
 import axios from "axios";
+import { uploadCloud } from "../../client/firebase/firebase";
+import { useHistory } from "react-router";
 export default function NewPartner() {
+	let history = useHistory();
+
 	let [newPartner, setNewPartner] = useState({
 		company_name: "Company Name",
-		representataive: "Representative",
+		representative: "Representative",
 		phone_number: "Phone Number",
 		email: "Email",
 		address: "Address",
 		state: "State",
-		post_code: "PostCode",
+		postcode: "PostCode",
 		legal_structure: "Legal Structure",
 		country: "Coutnry ",
 		login: "Login",
-		rep_image_url: "",
+		password: "-",
+		repImgFile: {},
 	});
 
 	function savePartner() {
-		let formData = new FormData();
-		for (var key in newPartner) {
-			formData.append(key, newPartner[key]);
-		}
-		axios
-			.post("http://localhost:8080/partner/", newPartner, {
-				headers: {
-					"Content-Type": "multipart/form-data",
-				},
-			})
-			.then((res) => console.log(res));
+		uploadCloud(newPartner.repImgFile, "REP_PHOTO", (rep_url) => {
+			newPartner["rep_image_url"] = rep_url;
+			delete newPartner.repImgFile;
+			axios
+				.post("http://localhost:8080/partner/", newPartner, {
+					headers: {
+						"Content-Type": "application/json",
+					},
+				})
+				.then((res) => {
+					history.push("/admin");
+					window.location.reload();
+				});
+		});
 	}
 	return (
 		<div className="partner">
@@ -102,17 +110,17 @@ export default function NewPartner() {
 							<div className="partnerUpdateItem">
 								<input
 									type="text"
-									placeholder={newPartner.representataive}
+									placeholder={newPartner.representative}
 									onClick={() => {
 										setNewPartner({
 											...newPartner,
-											representataive: "",
+											representative: "",
 										});
 									}}
 									onChange={(e) => {
 										setNewPartner({
 											...newPartner,
-											representataive: e.target.value,
+											representative: e.target.value,
 										});
 									}}
 									className="partnerUpdateInput"
@@ -121,17 +129,17 @@ export default function NewPartner() {
 							<div className="partnerUpdateItem">
 								<input
 									type="text"
-									placeholder={newPartner.post_code}
+									placeholder={newPartner.postcode}
 									onClick={() => {
 										setNewPartner({
 											...newPartner,
-											post_code: "",
+											postcode: "",
 										});
 									}}
 									onChange={(e) => {
 										setNewPartner({
 											...newPartner,
-											post_code: e.target.value,
+											postcode: e.target.value,
 										});
 									}}
 									className="partnerUpdateInput"
@@ -243,14 +251,14 @@ export default function NewPartner() {
 								src="https://img.freepik.com/photos-gratuite/portrait-homme-blanc-isole_53876-40306.jpg?size=626&ext=jpg"
 								alt=""
 							/>
-							<input type="file" id="file" style={{ display: "none" }} />
+							<input
+								type="file"
+								onChange={(e) => {
+									newPartner["repImgFile"] = e.target.files[0];
+								}}
+								id="file"
+							/>
 
-							<button className="partnerUpdateButton">
-								<label htmlFor="file">
-									<PublishIcon className="partnerUpdateIcon" />
-								</label>
-								Upload
-							</button>
 							<button
 								id="saveButton"
 								onClick={() => {

@@ -15,8 +15,11 @@ function App() {
 				<Switch>
 					<Route component={Home} path="/partner" exact />
 					<Route component={Company} path="/partner/company" />
-					<Route component={UpdatePatient} path="/partner/updatePatient" />
 					<Route component={NewPatient} path="/partner/newPatient"></Route>
+					<Route
+						component={UpdatePatient}
+						path="/partner/updatePatient/:patient_id"
+					/>
 
 					<Route component={NewPartner} path="/admin/newpartner"></Route>
 					<Route component={AdminHome} path="/admin"></Route>

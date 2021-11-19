@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./updatePatient.scss";
 import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import PhoneIcon from "@material-ui/icons/Phone";
@@ -7,38 +7,40 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 import Topbar from "../topbar/Topbar";
 import Sidebar from "../sidebar/Sidebar";
 import { useState } from "react";
+import global from "../.env.js";
+import { useParams } from "react-router";
+import axios from "axios";
 
-export default function UpdatePatient() {
-	let [params, setParams] = useState({
-		patient_id: 1,
-		first_name: "ata",
-		last_name: "kaboudi",
-		phone_number: 290000,
-		email: "ata.kaboudi@gmail.com",
-		address: "23,Kedhe Street, ",
-		city: "Sousse",
-		state: "Sousse",
-		country: "Tunisia",
-		postcode: 1,
-		gender: "Male",
-		age: 20,
-		photo_url:
-			"https://img.freepik.com/photos-gratuite/portrait-homme-blanc-isole_53876-40306.jpg?size=626&ext=jpg",
-		scan_url: "a",
-		prostetic_url: "a",
-		amputation_level: "Hand",
-		left_right: "left",
-		size_of_hand: "B",
-		limb_photo_url: "a",
-		partner_id: "1",
-		comments_: "this is a comment ",
-		status: 1,
-	});
+export default function UpdatePatient(props) {
+	let [params, setParams] = useState({});
+	let { patient_id } = useParams();
+
+	useEffect(() => {
+		axios
+			.get(global.BACKEND + "patient/id/" + patient_id)
+			.then((res) => {
+				console.log(res.data);
+				setParams(res.data[0]);
+			})
+			.catch((err) => {
+				alert("ERROR");
+			});
+	}, []);
 
 	function changeParams(attribute) {
 		setParams({ ...params, ...attribute });
 	}
 	let [display_edit, setDisplay_edit] = useState(1);
+
+	function submitChanges() {
+		delete params.patient_id;
+		axios
+			.put(global.BACKEND + "patient/" + patient_id, params)
+			.then((res) => {
+				window.location.reload();
+			})
+			.catch((err) => alert(err));
+	}
 	return (
 		<div className="patient">
 			<Topbar />
@@ -131,6 +133,18 @@ export default function UpdatePatient() {
 										<span className="patientShowInfoTitle">
 											{params.status === 0 ? "Waiting" : "Equipped"}
 										</span>
+									</div>
+									<div className="patientShowInfo">
+										<a href={params.photo_url}>Patient Image</a>
+										<span class="material-icons">arrow_drop_down</span>
+									</div>
+									<div className="patientShowInfo">
+										<a href={params.limb_photo_url}>Limb Image</a>
+										<span class="material-icons">arrow_drop_down</span>
+									</div>
+									<div className="patientShowInfo">
+										<a href={params.scan_url}>3D Scan</a>
+										<span class="material-icons">arrow_drop_down</span>
 									</div>
 									<span className="patientShowTitle">Comments</span>
 									<div className="patientShowInfo">
@@ -317,7 +331,13 @@ export default function UpdatePatient() {
 										</div>
 									</div>
 								</form>
-								<button className="patientUpdateButton">Update</button>
+								<button
+									className="patientUpdateButton"
+									onClick={() => {
+										submitChanges();
+									}}>
+									Update
+								</button>
 							</div>
 						)}
 					</div>

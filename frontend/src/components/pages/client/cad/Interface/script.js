@@ -1,6 +1,7 @@
 import init from "./init";
 import { rotateY } from "./animate";
 import { loadOBJ } from "../core";
+import { exportObject } from "./exporter";
 import {
 	slice,
 	engrave,
@@ -9,10 +10,18 @@ import {
 	setCylinderParams,
 } from "../core";
 
+import {
+	Receiver,
+	sliceObject,
+	measureObject,
+	engraveObject,
+	generateCylidner,
+	exportObject_,
+} from "./commands/command";
 import * as THREE from "three";
 
-export default function cadCore() {
-	const SOURCE_URL = "http://127.0.0.1:8887/model.obj";
+export default function cadCore(url) {
+	const SOURCE_URL = url;
 	const STATUS_ELEMENT = document.getElementById("status");
 
 	// DEFAULT MESHES PARAMS
@@ -38,43 +47,43 @@ export default function cadCore() {
 	const view = init();
 	const { scene, renderer, camera, controls } = view;
 
+	let receiver = new Receiver();
+	let sliceeObjectCommand = new sliceObject();
+	let engraveObjectCommand = new engraveObject();
+	let generateCylinderCommand = new generateCylidner();
+	let measureObjectCommand = new measureObject();
+	let exportObjectCommand = new exportObject_();
+
 	loadOBJ(SOURCE_URL, STATUS_ELEMENT, (object) => {
 		arm = object;
+		console.log(arm);
 		object.translateX(-0.5);
 		scene.add(object);
 		rotateY(object, view);
 	});
 
-	function sliceGeometry(UPlane, DPlane) {
-		let objectGeometry = arm.children[0].geometry;
-
-		let sliced = slice(objectGeometry, UPlane, DPlane);
-		// 0.02,-0.2
-		/* Hand Mold */
-		let moldGeometry = sliced.section;
-
-		mold = new THREE.Mesh(moldGeometry, m);
-
-		scene.add(mold);
-	}
-
-	function engraveGeometry() {
-		let final = engrave(cylinder, mold);
+	document.getElementById("engrave").addEventListener("click", () => {
+		let final = receiver.execute(engraveObjectCommand, [cylinder, mold]);
 		final.translateX(0.5);
 		scene.add(final);
-	}
-
-	document.getElementById("engrave").addEventListener("click", () => {
-		engraveGeometry(mold);
 	});
 	document.getElementById("computeCylinder").addEventListener("click", () => {
-		cylinder = setCylinderParams(mold.geometry, m);
+		cylinder = receiver.execute(generateCylinderCommand, [mold.geometry, m]);
 		scene.add(cylinder);
 	});
+	document.getElementById("export").addEventListener("click", () => {
+		receiver.execute(exportObjectCommand, [
+			scene.children[scene.children.length - 1],
+		]);
+	});
+
+	document.getElementById("slice").addEventListener("click", () => {
+		setSliceAxis();
+	});
+
 	function setSliceAxis() {
 		let UPlane_Ycoordinate = 0;
 		let DPlane_Ycoordinate = 0;
-
 		const UplaneG = new THREE.PlaneGeometry(0.5, 0.5);
 		const Uplane = new THREE.Mesh(UplaneG, m);
 		Uplane.translateX(-0.5);
@@ -109,24 +118,19 @@ export default function cadCore() {
 		});
 
 		document.getElementById("confirmSlice").addEventListener("click", () => {
-			sliceGeometry(UPlane_Ycoordinate, DPlane_Ycoordinate);
+			//sliceGeometry(UPlane_Ycoordinate, DPlane_Ycoordinate);
+			let objectGeometry = arm.children[0].geometry;
+
+			let geo = receiver.execute(sliceeObjectCommand, [
+				objectGeometry,
+				UPlane_Ycoordinate,
+				DPlane_Ycoordinate,
+			]);
+
+			mold = new THREE.Mesh(geo, m);
+			scene.add(mold);
+
+			let { edge } = receiver.execute(measureObjectCommand, [mold.geometry]);
 		});
 	}
-
-	document.getElementById("slice").addEventListener("click", () => {
-		setSliceAxis();
-	});
-
-	document.getElementById("measure").addEventListener("click", () => {
-		let { edge } = measure(mold.geometry);
-
-		var g = new THREE.BufferGeometry();
-		g.setAttribute(
-			"position",
-			new THREE.BufferAttribute(new Float32Array(edge), 3)
-		);
-		let mesh = new THREE.Mesh(g, r);
-
-		scene.add(mesh);
-	});
 }

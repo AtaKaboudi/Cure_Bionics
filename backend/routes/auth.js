@@ -15,7 +15,7 @@ router.get("/email", (req, res) => {
 				.status(403)
 				.send({ status: "Unauthorized", message: "Unknown Client" });
 		}
-		if (resu[0].password == "") {
+		if (resu[0].password === "-") {
 			return res
 				.status(200)
 				.json({ partner_id: resu[0].partner_id, firstTime: true });

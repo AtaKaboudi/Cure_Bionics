@@ -7,11 +7,13 @@ import Sidebar from "../sidebar/Sidebar";
 import Topbar from "../topbar/Topbar";
 import global from "../.env.js";
 import axios from "axios";
+import { uploadCloud } from "../firebase/firebase";
 export default function Company() {
 	let [toggle_edit, setToggle_edit] = useState(false);
+	console.log(localStorage.getItem("partner_id"));
 	useEffect(() => {
 		axios
-			.get(global.BACKEND + "partner/id/1")
+			.get(global.BACKEND + "partner/id/" + localStorage.getItem("partner_id"))
 			.catch(function (error) {
 				console.log(error);
 			})
@@ -42,6 +44,7 @@ export default function Company() {
 		state: "State",
 		postcode: "PostCode",
 		country: "Country",
+		repImgFile: {},
 		legal_structure: "Legal Structue",
 	});
 
@@ -50,6 +53,25 @@ export default function Company() {
 	}
 	function setOnClick(attribute) {
 		setInput({ ...input, ...attribute });
+	}
+
+	function submitChange() {
+		uploadCloud(input.repImgFile, "REP_PHOTO", (repImgURL) => {
+			input["rep_image_url"] = repImgURL;
+			delete input.repImgFile;
+			axios
+				.put(
+					global.BACKEND + "partner/" + localStorage.getItem("partner_id"),
+					input
+				)
+				.catch(function (error) {
+					alert(error);
+				})
+				.then(function (res) {
+					console.log("[BACKEND] Succesfull Update");
+					window.location.reload();
+				});
+		});
 	}
 	return (
 		<div className="company">
@@ -127,7 +149,21 @@ export default function Company() {
 								<span className="companyUpdateTitle">Edit</span>
 								<form className="companyUpdateForm">
 									<div className="companyUpdateItem">
-										<label>Name</label>
+										<label>Company Name</label>
+										<input
+											type="text"
+											value={input.company_name}
+											onClick={() => {
+												setInput({ company_name: "" });
+											}}
+											onChange={(e) => {
+												changeInputState("company_name", e.target.value);
+											}}
+											className="companyUpdateInput"
+										/>
+									</div>
+									<div className="companyUpdateItem">
+										<label>Representative</label>
 										<input
 											type="text"
 											value={input.representative}
@@ -236,14 +272,17 @@ export default function Company() {
 										src="https://img.freepik.com/photos-gratuite/portrait-homme-blanc-isole_53876-40306.jpg?size=626&ext=jpg"
 										alt=""
 									/>
-									<input type="file" id="file" style={{ display: "none" }} />
+									<input
+										type="file"
+										onChange={(e) => {
+											changeInputState("repImgFile", e.target.files[0]);
+										}}
+										id="file"
+									/>
 
 									<button
 										className="companyUpdateButton"
-										onClick={() => console.log(input)}>
-										<label htmlFor="file">
-											<PublishIcon className="companyUpdateIcon" />
-										</label>
+										onClick={() => submitChange()}>
 										Update
 									</button>
 								</div>

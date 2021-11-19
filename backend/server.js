@@ -5,7 +5,6 @@ const bodyparser = require("body-parser");
 
 //ENVIRONNMENT CNFIG
 require("dotenv").config();
-console.log(require.cache);
 app.use(cors());
 
 //Body access

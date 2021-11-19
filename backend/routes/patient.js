@@ -35,8 +35,6 @@ router.get("/id/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-	console.log(req);
-	return;
 	db.insertPatient(req.body, res, (err, resu) => {
 		if (err) {
 			res.status(500).send("error");
@@ -49,8 +47,9 @@ router.post("/", (req, res) => {
 router.put("/:id", (req, res) => {
 	let patient_id = req.params.id;
 	let params = req.body;
+
 	db.updatePatient(params, patient_id, (err, resu) => {
-		if (err) res.send("error");
+		if (err) res.status(500).send("error");
 		res.status(200).send(resu);
 	});
 });

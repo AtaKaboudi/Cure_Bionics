@@ -17,7 +17,7 @@ export default function FeaturedInfo() {
 					params: {
 						offset: "1",
 						limit: "5",
-						partner_id: 1,
+						partner_id: localStorage.getItem("partner_id"),
 					},
 				}
 			)
@@ -34,7 +34,7 @@ export default function FeaturedInfo() {
 
 				{
 					params: {
-						partner_id: 1,
+						partner_id: localStorage.getItem("partner_id"),
 					},
 				}
 			)
@@ -49,6 +49,7 @@ export default function FeaturedInfo() {
 
 	let [params, setParams] = useState([
 		{
+			partner_id: -1,
 			first_name: "",
 			last_name: "",
 			photo_url:

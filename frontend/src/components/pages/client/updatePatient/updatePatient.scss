@@ -2,6 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	color: black;
 }
 .mainSection {
 	display: flex;
@@ -17,6 +18,10 @@
 	cursor: pointer;
 	font-size: 15px;
 	margin-left: 90%;
+}
+
+.mainPannelContainer label {
+	color: black;
 }
 
 .patientContainer {
@@ -90,6 +95,10 @@
 	min-width: 10vw;
 	width: fit-content;
 	height: fit-content;
+	a {
+		color: black;
+		text-decoration: none;
+	}
 }
 
 .patientShowIcon {

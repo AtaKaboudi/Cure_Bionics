@@ -9,13 +9,19 @@ import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import "./cad.scss";
 
 export default function Cad(props) {
+	let url = props.file;
 	useEffect(() => {
-		cadCore();
+		cadCore(url);
 		window.scrollTo(300, 2500);
+
+		document.getElementById("slice").addEventListener("click", () => {
+			document.getElementById("slicePannel").style.display = "flex";
+		});
+		document.getElementById("confirmSlice").addEventListener("click", () => {
+			document.getElementById("slicePannel").style.display = "none";
+		});
 	}, []);
-	document.getElementById("slice").addEventListener("click", () => {
-		document.getElementById("slicePannel").style.display = "flex";
-	});
+
 	return (
 		<div className="cadContainer">
 			<canvas id="canva"></canvas>
@@ -60,14 +66,14 @@ export default function Cad(props) {
 					</button>
 				</div>
 
-				<button id="measure" title="Measure">
-					<span class="material-icons">straighten</span>{" "}
-				</button>
 				<button id="computeCylinder" title="Add Cylinder">
 					<span class="material-icons">radio_button_unchecked</span>
 				</button>
 				<button id="engrave" title="Engrave">
 					<span class="material-icons">carpenter</span>
+				</button>
+				<button id="export" title="Export">
+					<span class="material-icons">file_download</span>
 				</button>
 			</div>
 		</div>
