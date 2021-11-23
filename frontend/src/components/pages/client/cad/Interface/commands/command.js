@@ -1,4 +1,11 @@
-import { slice, measure, engrave, setCylinderParams } from "../../core.js";
+import {
+	slice,
+	measure,
+	engrave,
+	setCylinderParams,
+	translate,
+	rotate,
+} from "../../core.js";
 import { exportObject } from "../exporter.js";
 
 var Command = function (execute) {
@@ -20,6 +27,13 @@ export var generateCylidner = function () {
 };
 export var exportObject_ = function () {
 	return new Command(exportObject);
+};
+
+export var translateObject = function () {
+	return new Command(translate);
+};
+export var rotateObject = function () {
+	return new Command(rotate);
 };
 
 export var Receiver = function () {

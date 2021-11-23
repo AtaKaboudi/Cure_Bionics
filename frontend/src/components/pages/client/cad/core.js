@@ -214,3 +214,15 @@ export function getCenterPoint(geometry) {
 
 	return { x: middle.x, y: middle.y, z: middle.z };
 }
+
+export function translate(mesh, axis, distance) {
+	if (axis === "z") mesh.translateZ(distance);
+	if (axis === "x") mesh.translateX(distance);
+	if (axis === "y") mesh.translateY(distance);
+}
+
+export function rotate(mesh, axis, rad) {
+	if (axis === "z") mesh.rotateZ(rad);
+	if (axis === "x") mesh.rotateX(rad);
+	if (axis === "y") mesh.rotateY(rad);
+}

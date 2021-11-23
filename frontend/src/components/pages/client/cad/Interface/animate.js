@@ -1,28 +1,23 @@
-import { Clock } from 'three';
+import { Clock } from "three";
 
-const clock = new Clock()
-
-
+const clock = new Clock();
 
 export function rotateY(object, view) {
-    var {  renderer, scene, camera, controls } = view;
-        function animate() {
-            
-            const elapsedTime = clock.getElapsedTime()
+	var { renderer, scene, camera, controls } = view;
+	function animate() {
+		const elapsedTime = clock.getElapsedTime();
 
-            // Update objects
-            object.rotation.y = .5 * elapsedTime
-        
-            // Update Orbital Controls
-            controls.update()
+		// Update objects
+		//object.rotation.y = 0.5 * elapsedTime;
 
-            // Render
-            renderer.render(scene, camera)
+		// Update Orbital Controls
+		controls.update();
 
-            // Call tick again on the next frame
-            window.requestAnimationFrame(animate)
-    }
-    animate();
+		// Render
+		renderer.render(scene, camera);
 
-
+		// Call tick again on the next frame
+		window.requestAnimationFrame(animate);
+	}
+	animate();
 }

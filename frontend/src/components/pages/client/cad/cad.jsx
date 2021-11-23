@@ -76,6 +76,37 @@ export default function Cad(props) {
 					<span class="material-icons">file_download</span>
 				</button>
 			</div>
+			<div id="controllers">
+				<button id="controllerUp">
+					<span class="material-icons">expand_less</span>
+				</button>
+				<button id="controllerDown">
+					<span class="material-icons">expand_more</span>
+				</button>
+				<button id="controllerLeft">
+					<span class="material-icons">chevron_left</span>
+				</button>
+				<button id="controllerRight">
+					<span class="material-icons">chevron_right</span>
+				</button>
+				<div id="rotate">
+					<div>
+						<label>X</label>
+						<button id="rotateX+">+</button>
+						<button id="rotateX-">-</button>
+					</div>
+					<div>
+						<label>Y</label>
+						<button id="rotateY+">+</button>
+						<button id="rotateY-">-</button>
+					</div>
+					<div>
+						<label>Z</label>
+						<button id="rotateZ+">+</button>
+						<button id="rotateZ-">-</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 }
