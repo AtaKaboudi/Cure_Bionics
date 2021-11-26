@@ -32,7 +32,7 @@ export default function Cad(props) {
 				<h1 id="x">x</h1>
 				<h1 id="y">y</h1>
 				<h1 id="z">z</h1>
-			</div>{" "}
+			</div>
 			<div id="ops">
 				<button id="slice" title="slice">
 					<span class="material-icons">content_cut</span>{" "}

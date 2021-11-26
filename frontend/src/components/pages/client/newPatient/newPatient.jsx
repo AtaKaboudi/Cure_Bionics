@@ -177,8 +177,15 @@ export default function NewPatient() {
 									setInput({ ...input, amputation_level: e.target.value })
 								}>
 								<option value="forequarter">Forequarter</option>
-								<option value="transhumeral">Transhumeral</option>
-								<option value="transradial">Transradial</option>
+								<option value="transhumeral">Shoulder disarticulation</option>
+								<option value="transradial">Above Elbow</option>
+								<option value="transradial">Below Elbow</option>
+								<option value="transradial">Wrist disarticulation</option>
+								<option value="transradial">Hip disarticulation</option>
+								<option value="transradial">Above Knee(Trans-femoral)</option>
+								<option value="transradial">Knee disarticulation</option>
+								<option value="transradial">Below the knee(Transtibial)</option>
+								<option value="transradial">Foot amputation</option>
 							</select>
 						</div>
 

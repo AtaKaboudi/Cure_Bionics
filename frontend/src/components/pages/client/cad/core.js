@@ -69,7 +69,6 @@ export function engrave(objectA, objectB) {
 export async function loadOBJ(SOURCE_URL, statusElement, callback) {
 	// instantiate a loader
 	const loader = new OBJLoader();
-	console.log(SOURCE_URL);
 
 	// load a resource
 	loader.load(
@@ -89,6 +88,7 @@ export async function loadOBJ(SOURCE_URL, statusElement, callback) {
 		// called when loading has errors
 		function (error) {
 			console.log("[OBJ Loader] Error");
+			console.log(error);
 			//console.trace(error);
 		}
 	);
@@ -117,14 +117,22 @@ export function measure(geometry) {
 	return geometry;
 }
 
-function computeDimensions(vertices) {
+export function computeDimensions(vertices) {
 	// COMPUTE MAXIMA AND MINIMA IN EDGES ON Z?X AXIS
 	let minX = vertices[0];
 	let maxX = vertices[0];
+	let minY = vertices[1];
+	let maxY = vertices[1];
 	let minZ = vertices[2];
 	let maxZ = vertices[2];
 
 	for (let i = 0; i < vertices.length; i += 3) {
+		if (vertices[i + 1] < minY) {
+			minY = vertices[i + 1];
+		}
+		if (vertices[i + 1] > maxY) {
+			maxY = vertices[i + 1];
+		}
 		if (vertices[i] < minX) {
 			minX = vertices[i];
 		}
@@ -142,6 +150,8 @@ function computeDimensions(vertices) {
 	return {
 		maxX: maxX,
 		minX: minX,
+		maxY: maxY,
+		minY: minY,
 		maxZ: maxZ,
 		minZ: minZ,
 	};
@@ -215,10 +225,11 @@ export function getCenterPoint(geometry) {
 	return { x: middle.x, y: middle.y, z: middle.z };
 }
 
-export function translate(mesh, axis, distance) {
-	if (axis === "z") mesh.translateZ(distance);
-	if (axis === "x") mesh.translateX(distance);
-	if (axis === "y") mesh.translateY(distance);
+export function translate(object, axis, distance) {
+	if (object instanceof THREE.Group) object = object.children[0];
+	if (axis === "z") object.translateZ(distance);
+	if (axis === "x") object.translateX(distance);
+	if (axis === "y") object.translateY(distance);
 }
 
 export function rotate(mesh, axis, rad) {

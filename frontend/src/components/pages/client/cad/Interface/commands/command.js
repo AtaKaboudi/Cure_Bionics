@@ -5,6 +5,7 @@ import {
 	setCylinderParams,
 	translate,
 	rotate,
+	computeDimensions,
 } from "../../core.js";
 import { exportObject } from "../exporter.js";
 
@@ -34,6 +35,9 @@ export var translateObject = function () {
 };
 export var rotateObject = function () {
 	return new Command(rotate);
+};
+export var computeDimensions_ = function () {
+	return new Command(computeDimensions);
 };
 
 export var Receiver = function () {

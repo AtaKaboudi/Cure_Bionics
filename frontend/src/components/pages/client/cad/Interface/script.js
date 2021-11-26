@@ -1,6 +1,6 @@
 import init from "./init";
 import { rotateY } from "./animate";
-import { loadOBJ } from "../core";
+import { loadOBJ, measure } from "../core";
 import { exportObject } from "./exporter";
 
 import {
@@ -12,6 +12,7 @@ import {
 	exportObject_,
 	translateObject,
 	rotateObject,
+	computeDimensions_,
 } from "./commands/command";
 import * as THREE from "three";
 
@@ -52,12 +53,30 @@ export default function cadCore(url) {
 	let exportObjectCommand = new exportObject_();
 	let translateObjectCommand = new translateObject();
 	let rotateObjectCommand = new rotateObject();
+	let computeDimensionsCommand = new computeDimensions_();
 	loadOBJ(SOURCE_URL, STATUS_ELEMENT, (object) => {
+		let vertices;
+		if (object instanceof THREE.Group) {
+			vertices = object.children[0].geometry.attributes.position.array;
+		} else if (object instanceof THREE.Mesh) {
+			vertices = object.geometry.attributes.position.array;
+		}
+
+		//	let measurements = receiver.execute(computeDimensionsCommand, [vertices]);
+
+		// to rescale object to 0-1 unit scale
+		//let scaleY = 1 / Math.abs(measurements.maxY - measurements.minY);
+		//object.children[0].scale.multiplyScalar(scaleY);
+
+		// translate to right initial Position
+		//			object.children[0].position.set(-1.1, 0.2, 0.2);
+		object.children[0].position.set(-0.5, 0, 0);
+
 		arm = object;
-		objects.push(object);
-		object.translateX(-0.5);
+
 		scene.add(object);
 		rotateY(object, view);
+		renderer.render(scene, camera);
 	});
 
 	document.getElementById("engrave").addEventListener("click", () => {
@@ -113,12 +132,14 @@ export default function cadCore(url) {
 
 		document.getElementById("confirmSlice").addEventListener("click", () => {
 			let objectGeometry = arm.children[0].geometry;
+
 			let geo = receiver.execute(sliceeObjectCommand, [
 				objectGeometry,
 				Uplane.position.y,
 				Dplane.position.y,
 			]);
 			mold = new THREE.Mesh(geo, m);
+			console.log(mold);
 			objects.push(mold);
 
 			scene.add(mold);
